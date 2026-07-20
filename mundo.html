@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mundo</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script src="data/misiones.js"></script>
+
+</head>
+
+
+<body class="bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-800 via-[#0a0f1c] to-black text-white min-h-screen pb-24">
+
+
+<div class="max-w-md mx-auto p-6">
+
+
+<a
+href="index.html"
+class="text-slate-400 hover:text-white">
+
+← Volver al mapa
+
+</a>
+
+
+
+<div
+class="mt-6 rounded-3xl bg-slate-800/60 border border-white/10 p-6">
+
+
+<div class="text-5xl mb-4">
+
+🌎
+
+</div>
+
+
+<h1
+id="titulo"
+class="text-3xl font-bold text-indigo-400">
+</h1>
+
+
+<p
+id="descripcion"
+class="mt-4 text-slate-300">
+</p>
+
+
+</div>
+
+
+
+
+
+<div id="info-mundo">
+
+
+<div
+class="mt-6 rounded-3xl bg-slate-800/40 border border-white/10 p-6">
+
+
+<h2 class="font-bold text-lg mb-3">
+
+Objetivo
+
+</h2>
+
+
+<p
+id="objetivo"
+class="text-slate-300">
+</p>
+
+
+</div>
+
+
+
+
+
+<div
+class="mt-6 rounded-3xl bg-slate-800/40 border border-white/10 p-6">
+
+
+<h2 class="font-bold text-lg mb-3">
+
+Habilidades
+
+</h2>
+
+
+<ul
+id="habilidades"
+class="space-y-2">
+</ul>
+
+
+</div>
+
+
+
+
+
+<button
+
+id="continuar"
+
+class="mt-8 w-full rounded-2xl bg-indigo-600 hover:bg-indigo-500 p-4 font-bold">
+
+</button>
+
+
+<p
+id="bloqueo"
+class="hidden text-center text-slate-400 mt-4">
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+<div
+id="lista-misiones"
+class="hidden mt-6 space-y-4">
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+const id =
+new URLSearchParams(location.search).get("id");
+
+
+const mundo =
+DB_MUNDOS[id];
+
+
+
+const progresoMundos =
+JSON.parse(
+localStorage.getItem("mundosCompletados") || "[]"
+);
+
+
+
+const numeroMundo =
+parseInt(id.replace("mundo",""));
+
+
+
+const desbloqueado =
+
+numeroMundo === 1 ||
+
+progresoMundos.includes(
+"mundo" + (numeroMundo - 1)
+);
+
+
+
+
+
+
+document.getElementById("titulo").innerText =
+mundo.titulo;
+
+
+document.getElementById("descripcion").innerText =
+mundo.descripcion;
+
+
+document.getElementById("objetivo").innerText =
+mundo.objetivo;
+
+
+
+
+
+const lista =
+document.getElementById("habilidades");
+
+
+
+mundo.habilidades.forEach(habilidad=>{
+
+
+const li =
+document.createElement("li");
+
+
+li.innerHTML =
+"🎧 " + habilidad;
+
+
+lista.appendChild(li);
+
+
+});
+
+
+
+
+
+
+
+
+const boton =
+document.getElementById("continuar");
+
+
+
+const mensajeBloqueo =
+document.getElementById("bloqueo");
+
+
+
+
+if(desbloqueado){
+
+
+
+boton.innerText =
+"Ver misiones";
+
+
+
+boton.onclick = ()=>{
+
+mostrarMisiones();
+
+};
+
+
+
+}
+else{
+
+
+
+boton.innerText =
+"🔒 Misiones bloqueadas";
+
+
+
+boton.classList.remove(
+"bg-indigo-600",
+"hover:bg-indigo-500"
+);
+
+
+
+boton.classList.add(
+"bg-slate-700"
+);
+
+
+
+
+mensajeBloqueo.innerText =
+
+"🔒 Podés explorar este mundo, pero completá el mundo anterior para desbloquear sus misiones.";
+
+
+
+mensajeBloqueo.classList.remove(
+"hidden"
+);
+
+
+
+}
+
+
+
+
+
+
+
+function mostrarMisiones(){
+
+
+
+document
+.getElementById("info-mundo")
+.classList.add("hidden");
+
+
+
+
+const listaMisiones =
+document.getElementById("lista-misiones");
+
+
+
+listaMisiones.classList.remove("hidden");
+
+
+
+
+listaMisiones.innerHTML = `
+
+
+<h2 class="text-2xl font-bold text-indigo-400 mb-4">
+
+Mapa de misiones
+
+</h2>
+
+
+`;
+
+
+
+
+
+const progreso =
+JSON.parse(
+localStorage.getItem("misionesCompletadas") || "[]"
+);
+
+
+
+
+
+mundo.misiones.forEach((mision,index)=>{
+
+
+
+const bloqueada =
+
+index > 0 &&
+
+!progreso.includes(
+mundo.misiones[index-1].id
+);
+
+
+
+
+const tarjeta =
+document.createElement("a");
+
+
+
+tarjeta.href =
+
+bloqueada
+
+?
+
+"#"
+
+:
+
+`mision.html?id=${mision.id}`;
+
+
+
+
+
+
+tarjeta.className =
+
+
+`
+
+block
+
+rounded-3xl
+
+p-5
+
+bg-slate-800/50
+
+border
+
+border-white/10
+
+
+${bloqueada ? "opacity-40" : ""}
+
+`;
+
+
+
+
+
+
+
+tarjeta.innerHTML = `
+
+
+
+<div class="flex justify-between items-center">
+
+
+
+<div>
+
+
+
+<h3 class="font-bold">
+
+${index+1}. ${mision.titulo}
+
+</h3>
+
+
+
+
+<p class="text-sm text-slate-400 mt-2">
+
+${mision.descripcion || ""}
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="text-2xl">
+
+
+${
+
+bloqueada
+
+?
+
+"🔒"
+
+:
+
+progreso.includes(mision.id)
+
+?
+
+"⭐"
+
+:
+
+"▶"
+
+}
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+`;
+
+
+
+listaMisiones.appendChild(tarjeta);
+
+
+
+});
+
+
+
+}
+
+
+
+
+</script>
+
+
+</body>
+</html>

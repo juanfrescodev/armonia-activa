@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Misión</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+<script src="data/misiones.js"></script>
+
+<script src="js/audio.js"></script>
+<script src="js/progreso.js"></script>
+<script src="js/motor.js"></script>
+<script src="js/componentes.js"></script>
+
+<script src="js/componentes/texto.js"></script>
+<script src="js/componentes/comparacion.js"></script>
+<script src="js/componentes/audio.js"></script>
+<script src="js/componentes/teoria.js"></script>
+<script src="js/componentes/seleccion.js"></script>
+<script src="js/componentes/memoria.js"></script>
+<script src="js/componentes/progreso.js"></script>
+
+</head>
+
+
+<body class="bg-slate-900 text-white min-h-screen pb-24">
+
+<div class="max-w-xl mx-auto p-6">
+
+<h1
+id="titulo"
+class="text-3xl font-bold text-indigo-400 mb-8">
+</h1>
+
+
+<div
+id="contenido"
+class="space-y-4">
+</div>
+
+
+</div>
+
+
+<script>
+
+const id = new URLSearchParams(location.search).get("id");
+
+
+const mision =
+obtenerTodasLasMisiones().find(
+m => m.id === id
+);
+
+const mundo = Object.values(DB_MUNDOS).find(
+m => m.misiones.some(
+mis => mis.id === id
+)
+);
+
+
+if(!mision){
+
+    console.error("Misión no encontrada:", id);
+
+    location.href="index.html";
+
+}
+
+const motor = new Motor(mision);
+
+
+
+function terminarMision(){
+
+    completarMision(mision.id);
+
+    agregarXP(
+    mision.xp || 50
+    );
+
+
+    if(mision.id.startsWith("boss")){
+
+        completarMundo(mundo.id);
+
+    }
+
+
+    const misiones =
+    mundo.misiones;
+
+
+    const posicion =
+    misiones.findIndex(
+        m=>m.id===mision.id
+    );
+
+
+    let siguiente =
+    misiones[posicion+1];
+
+
+    // Si terminó el jefe del mundo
+    if(mision.id.startsWith("boss")){
+
+        siguiente = null;
+
+    }
+
+
+    const cont =
+    document.getElementById("contenido");
+
+
+    cont.innerHTML = `
+
+        <div class="text-center space-y-6">
+
+            <div class="text-6xl">
+                ⭐
+            </div>
+
+            <h2 class="text-2xl font-bold text-indigo-400">
+                ¡Misión completada!
+            </h2>
+
+            <p class="text-emerald-400 text-2xl font-bold">
+                +${mision.xp || 50} XP
+            </p>
+
+            <p class="text-slate-300">
+                Nivel ${obtenerNivel()}
+            </p>
+
+
+            ${
+                siguiente
+                ?
+                `
+                <p class="text-slate-300">
+                    Nuevo desafío desbloqueado:
+                </p>
+
+                <p class="font-bold">
+                    ${siguiente.titulo}
+                </p>
+
+
+                <button
+                onclick="location.href='mision.html?id=${siguiente.id}'"
+                class="w-full p-4 rounded-xl bg-indigo-600">
+
+                Continuar
+
+                </button>
+                `
+                :
+                `
+                <p>
+                🏆 Completaste este mundo.
+                </p>
+
+                <p class="text-indigo-300">
+                Un nuevo camino está disponible.
+                </p>
+
+
+                <button
+                onclick="location.href='mundo-completado.html'"
+                class="w-full p-4 rounded-xl bg-indigo-600">
+
+                Continuar aventura
+
+                </button>
+                `
+            }
+
+        </div>
+
+    `;
+
+}
+
+
+document.getElementById("titulo").innerText =
+mision.titulo;
+
+const barra =
+renderProgreso(
+    mision,
+    mundo
+);
+
+
+document
+.getElementById("titulo")
+.insertAdjacentElement(
+    "beforebegin",
+    barra
+);
+
+
+
+render();
+
+
+
+function render(){
+
+
+const paso = motor.paso;
+
+
+if(!paso){
+
+    terminarMision();
+
+    return;
+
+}
+
+
+const cont = document.getElementById("contenido");
+
+
+cont.innerHTML = "";
+
+
+
+// Buscamos el componente correspondiente
+
+const componente = COMPONENTES[paso.tipo];
+
+
+
+if(componente){
+
+
+    componente(
+        paso,
+        cont,
+        motor,
+        render,
+        mision
+    );
+
+
+}else{
+
+
+    console.error(
+        "No existe componente para:",
+        paso.tipo
+    );
+
+
+}
+
+
+
+}
+
+
+
+</script>
+
+<nav 
+class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-xl bg-slate-900/90 backdrop-blur border-t border-white/10 flex justify-around py-4">
+
+
+<a href="index.html"
+class="text-center text-slate-300">
+
+<div class="text-2xl">
+🗺️
+</div>
+
+<div class="text-xs">
+Ruta
+</div>
+
+</a>
+
+
+<a href="lab.html"
+class="text-center text-slate-300">
+
+<div class="text-2xl">
+🎹
+</div>
+
+<div class="text-xs">
+Lab
+</div>
+
+</a>
+
+
+<a href="perfil.html"
+class="text-center text-slate-300">
+
+<div class="text-2xl">
+👤
+</div>
+
+<div class="text-xs">
+Perfil
+</div>
+
+</a>
+
+
+</nav>
+
+</body>
+
+</html>

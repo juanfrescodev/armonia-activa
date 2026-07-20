@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Armonía Activa</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script src="data/misiones.js"></script>
+
+</head>
+
+
+<body class="bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-800 via-[#0a0f1c] to-black text-white min-h-screen pb-24">
+
+
+
+<header class="p-6 text-center border-b border-white/10">
+
+
+<h1 class="text-3xl font-bold text-indigo-400">
+
+Armonía Activa
+
+</h1>
+
+
+<p class="text-slate-400 mt-2">
+
+Tu camino para aprender música
+
+</p>
+
+
+</header>
+
+
+
+
+<main
+id="lista"
+class="max-w-md mx-auto p-6 space-y-6">
+
+</main>
+
+
+
+
+
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-[#0a0f1c]/90 border-t border-white/10 flex justify-around py-4">
+
+
+<a href="index.html">
+
+🗺️ Ruta
+
+</a>
+
+
+<a href="lab.html">
+
+🎹 Lab
+
+</a>
+
+
+<a href="perfil.html">
+
+👤 Perfil
+
+</a>
+
+
+</nav>
+
+
+
+
+
+<script>
+
+
+
+const lista =
+document.getElementById("lista");
+
+
+
+const mundosCompletados =
+JSON.parse(
+localStorage.getItem("mundosCompletados") || "[]"
+);
+
+
+
+
+
+Object.values(DB_MUNDOS).forEach((mundo,index)=>{
+
+
+const completado =
+mundosCompletados.includes(mundo.id);
+
+
+
+
+
+const numeroMundo =
+parseInt(mundo.id.replace("mundo",""));
+
+
+const desbloqueado =
+numeroMundo === 1 ||
+mundosCompletados.includes("mundo" + (numeroMundo - 1));
+
+
+
+
+const card =
+document.createElement("a");
+
+
+
+
+card.href =
+`mundo.html?id=${mundo.id}`;
+
+
+
+
+
+card.className = `
+
+
+block
+
+rounded-3xl
+
+p-6
+
+bg-slate-800/50
+
+border
+
+border-white/10
+
+transition
+
+
+${!desbloqueado ? "opacity-60 hover:bg-slate-700/50" : "hover:bg-slate-700/50"}
+
+`;
+
+
+
+
+
+
+card.innerHTML = `
+
+
+
+<div class="flex justify-between items-center">
+
+
+<h2 class="text-xl font-bold">
+
+${
+
+!desbloqueado
+
+?
+
+"🔒"
+
+:
+
+completado
+
+?
+
+"⭐"
+
+:
+
+"🌎"
+
+}
+
+
+${mundo.titulo}
+
+
+</h2>
+
+
+
+<span class="text-2xl">
+
+${
+
+!desbloqueado
+
+?
+
+"🔒"
+
+:
+
+completado
+
+?
+
+"✓"
+
+:
+
+"▶"
+
+}
+
+</span>
+
+
+</div>
+
+
+
+
+
+<p class="text-sm text-slate-400 mt-3">
+
+${mundo.descripcion}
+
+</p>
+
+
+
+
+
+
+<div class="mt-4 text-sm font-bold">
+
+
+${
+
+
+!desbloqueado
+
+?
+
+"Completa el mundo anterior para desbloquearlo"
+
+
+:
+
+
+completado
+
+?
+
+"⭐ Mundo completado"
+
+
+:
+
+
+"▶ Entrar al mundo"
+
+
+}
+
+
+</div>
+
+
+
+`;
+
+
+
+
+
+lista.appendChild(card);
+
+
+
+});
+
+
+
+
+</script>
+
+
+</body>
+
+</html>
