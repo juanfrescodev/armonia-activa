@@ -8,7 +8,12 @@
 
 <title>Mundo completado</title>
 
+
 <script src="https://cdn.tailwindcss.com"></script>
+
+
+<script src="data/misiones.js"></script>
+
 
 </head>
 
@@ -24,6 +29,7 @@
 </div>
 
 
+
 <h1 class="text-3xl font-bold text-indigo-400 mb-4">
 
 Mundo completado
@@ -31,41 +37,29 @@ Mundo completado
 </h1>
 
 
-<h2 class="text-xl font-bold mb-6">
 
-🌎 El oído musical
+<h2
+id="tituloMundo"
+class="text-xl font-bold mb-6">
 
 </h2>
 
 
-<p class="text-slate-300 mb-8">
 
-Has desarrollado las bases del oído musical:
+<p
+id="descripcionMundo"
+class="text-slate-300 mb-8">
 
 </p>
 
 
-<div class="bg-slate-800 rounded-2xl p-5 text-left space-y-3 mb-8">
 
-
-<p>
-🎧 Reconocimiento de sonidos
-</p>
-
-<p>
-📈 Percepción de altura
-</p>
-
-<p>
-↕️ Movimiento melódico
-</p>
-
-<p>
-🎵 Distancias entre sonidos
-</p>
-
+<div
+id="habilidades"
+class="bg-slate-800 rounded-2xl p-5 text-left space-y-3 mb-8">
 
 </div>
+
 
 
 <p class="text-indigo-300 font-bold mb-6">
@@ -73,6 +67,7 @@ Has desarrollado las bases del oído musical:
 Un nuevo camino está disponible...
 
 </p>
+
 
 
 <a href="index.html"
@@ -83,7 +78,105 @@ Continuar aventura
 </a>
 
 
+
 </div>
+
+
+
+
+
+<script>
+
+
+const idMundo =
+
+new URLSearchParams(location.search)
+
+.get("id");
+
+
+
+const mundo =
+
+DB_MUNDOS[idMundo];
+
+
+
+if(!mundo){
+
+
+console.error(
+"No existe el mundo:",
+idMundo
+);
+
+
+document.getElementById("tituloMundo")
+.innerText =
+"Error: mundo no encontrado";
+
+
+}
+else{
+
+
+document
+.getElementById("tituloMundo")
+.innerText =
+
+"🌎 " + mundo.titulo;
+
+
+
+document
+.getElementById("descripcionMundo")
+.innerText =
+
+mundo.descripcion;
+
+
+
+const habilidades =
+
+document.getElementById("habilidades");
+
+
+
+if(mundo.habilidades){
+
+
+habilidades.innerHTML =
+
+
+mundo.habilidades
+
+.map(
+
+habilidad =>
+
+`
+
+<p>
+🎵 ${habilidad}
+</p>
+
+`
+
+)
+
+.join("");
+
+
+
+}
+
+
+
+}
+
+
+
+</script>
 
 
 </body>

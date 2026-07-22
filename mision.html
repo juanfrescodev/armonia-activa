@@ -26,6 +26,18 @@
 <script src="js/componentes/memoria.js"></script>
 <script src="js/componentes/progreso.js"></script>
 
+<script src="js/componentes/teclado.js"></script>
+
+<script src="js/componentes/piano_interactivo.js"></script>
+
+<script src="js/componentes/pentagrama_visual.js"></script>
+
+<script src="js/componentes/pentagrama_interactivo.js"></script>
+<script src="js/datos/notas.js"></script>
+<script src="js/componentes/notas_pentagrama.js"></script>
+<script src="js/componentes/nota_explicacion.js"></script>
+<script src="js/componentes/identificar_nota.js"></script>
+
 </head>
 
 
@@ -173,7 +185,7 @@ function terminarMision(){
 
 
                 <button
-                onclick="location.href='mundo-completado.html'"
+                onclick="location.href='mundo-completado.html?id=${mundo.id}'"
                 class="w-full p-4 rounded-xl bg-indigo-600">
 
                 Continuar aventura

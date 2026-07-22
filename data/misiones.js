@@ -2577,39 +2577,2218 @@ const DB_MUNDOS = {
         },
 
 
-    mundo2:{
+mundo2:{
 
-        id:"mundo2",
+    id:"mundo2",
 
-
-        titulo:
-        "El lenguaje musical",
-
-
-        descripcion:
-        "Convertí lo que escuchás en conceptos musicales: notas, intervalos y escalas.",
+    titulo:
+    "El lenguaje musical",
 
 
-        objetivo:
-        "Comprender cómo se organiza el sonido dentro del sistema musical.",
+    descripcion:
+    "Descubrí cómo los sonidos se convierten en notas, melodías y música.",
 
 
-        habilidades:[
-
-            "Notas musicales",
-
-            "Intervalos",
-
-            "Escalas"
-
-        ],
+    objetivo:
+    "Dominar las bases del lenguaje musical: reconocer notas, alturas, movimientos melódicos y lectura musical básica.",
 
 
-        misiones:[]
+    habilidades:[
 
+        "Reconocimiento de notas",
+
+        "Altura del sonido",
+
+        "Melodías",
+
+        "Lectura musical",
+
+        "Lenguaje musical"
+
+     
+
+    ],
+
+
+
+    misiones:[
+
+
+
+// ======================================================
+// MISION 1
+// ======================================================
+
+
+{
+    id:"descubriendo_do",
+
+    titulo:"Descubriendo DO",
+
+    descripcion:
+    "La primera pieza del lenguaje musical.",
+
+
+
+    pasos:[
+
+
+        {
+
+            tipo:"nota_explicacion",
+
+            nota:"C4",
+
+            nombre:"DO",
+
+            texto:
+            "Todo lenguaje necesita un punto de partida. En música comenzaremos con DO. Escuchá su sonido, observá dónde aparece y aprendé a reconocerlo."
+
+        },
+
+
+        {
+
+            tipo:"piano_interactivo",
+
+            pregunta:
+            "Encontrá la nota DO en el piano.",
+
+            correcta:
+            "C"
+
+        },
+
+
+        {
+
+            tipo:"pentagrama_interactivo",
+
+            pregunta:
+            "Encontrá DO en el pentagrama.",
+
+            correcta:
+            "C4"
+
+        },
+
+
+        {
+
+            tipo:"nota_explicacion",
+
+            nota:"C4",
+
+            nombre:"DO",
+
+            texto:
+            "Perfecto. Ahora sabés que un sonido puede tener un nombre, una posición en un instrumento y una escritura musical."
+
+        }
+
+
+    ]
+
+},
+
+
+
+
+// ======================================================
+// MISION 2
+// ======================================================
+
+
+{
+
+    id:"primer_movimiento",
+
+    titulo:
+    "El primer movimiento",
+
+
+    descripcion:
+    "Descubrí que las notas pueden moverse hacia arriba y hacia abajo.",
+
+
+
+    pasos:[
+
+
+
+        {
+
+            tipo:"nota_explicacion",
+
+            nota:"D4",
+
+            nombre:"RE",
+
+            texto:
+            "Aparece una nueva nota. RE está más arriba que DO. La diferencia entre sonidos puede sentirse como un movimiento."
+
+        },
+
+
+
+        {
+
+            tipo:"comparacion",
+
+            pregunta:
+            "Escuchá estas notas. ¿Cuál suena más aguda?",
+
+
+            ejemplos:[
+
+
+                {
+                    nombre:"DO",
+
+                    notas:[
+                        "C4"
+                    ]
+                },
+
+
+                {
+                    nombre:"RE",
+
+                    notas:[
+                        "D4"
+                    ]
+                }
+
+
+            ],
+
+
+            opciones:[
+
+                "DO",
+
+                "RE"
+
+            ],
+
+
+            correcta:1
+
+
+        },
+
+
+
+        {
+
+            tipo:"comparacion",
+
+            pregunta:
+            "Escuchá la melodía. ¿Qué movimiento hace?",
+
+
+            ejemplos:[
+
+
+                {
+
+                    nombre:"Melodía",
+
+                    melodia:[
+
+                        "C4",
+                        "D4"
+
+                    ]
+
+                }
+
+
+            ],
+
+
+            opciones:[
+
+                "Sube",
+
+                "Baja"
+
+            ],
+
+
+            correcta:0
+
+        },
+
+
+
+        {
+
+            tipo:"piano_interactivo",
+
+            pregunta:
+            "Encontrá RE en el piano.",
+
+            correcta:
+            "D"
+
+        },
+
+
+        {
+
+            tipo:"pentagrama_interactivo",
+
+            pregunta:
+            "Encontrá RE en el pentagrama.",
+
+            correcta:
+            "D4"
+
+        }
+
+
+
+    ]
+
+},
+
+
+
+
+// ======================================================
+// MISION 3
+// ======================================================
+
+
+{
+
+    id:"tres_notas_crean_musica",
+
+    titulo:
+    "Tres notas crean música",
+
+
+    descripcion:
+    "Con solo tres sonidos ya podemos construir pequeñas melodías.",
+
+
+
+    pasos:[
+
+
+
+        {
+
+            tipo:"nota_explicacion",
+
+            nota:"E4",
+
+            nombre:"MI",
+
+            texto:
+            "MI es la tercera nota que aprendemos. Ahora tenemos DO, RE y MI: tres sonidos capaces de crear pequeñas ideas musicales."
+
+        },
+
+
+
+        {
+
+            tipo:"comparacion",
+
+            pregunta:
+            "Escuchá esta melodía. ¿Qué dirección tiene?",
+
+
+            ejemplos:[
+
+
+                {
+
+                    nombre:"Melodía",
+
+                    melodia:[
+
+                        "C4",
+                        "D4",
+                        "E4"
+
+                    ]
+
+                }
+
+
+            ],
+
+
+            opciones:[
+
+                "Sube",
+
+                "Baja"
+
+            ],
+
+
+            correcta:0
+
+
+        },
+
+
+
+        {
+
+            tipo:"comparacion",
+
+            pregunta:
+            "¿Cuál nota está más arriba?",
+
+
+            ejemplos:[
+
+
+                {
+
+                    nombre:"MI",
+
+                    notas:[
+                        "E4"
+                    ]
+
+                },
+
+
+                {
+
+                    nombre:"DO",
+
+                    notas:[
+                        "C4"
+                    ]
+
+                }
+
+
+            ],
+
+
+            opciones:[
+
+                "MI",
+
+                "DO"
+
+            ],
+
+
+            correcta:0
+
+
+        },
+
+
+
+        {
+
+            tipo:"piano_interactivo",
+
+            pregunta:
+            "Encontrá MI en el piano.",
+
+            correcta:
+            "E"
+
+        },
+
+
+
+        {
+
+            tipo:"pentagrama_interactivo",
+
+            pregunta:
+            "Encontrá MI en el pentagrama.",
+
+            correcta:
+            "E4"
+
+        }
+
+
+
+    ]
+
+},
+
+
+
+
+
+// ======================================================
+// MISION 4
+// ======================================================
+
+
+{
+
+    id:"la_escalera_musical",
+
+    titulo:
+    "La escalera musical",
+
+
+    descripcion:
+    "Las notas empiezan a formar un camino.",
+
+
+
+    pasos:[
+
+
+
+        {
+
+            tipo:"nota_explicacion",
+
+            nota:"F4",
+
+            nombre:"FA",
+
+            texto:
+            "FA continúa la escalera. Cada nota ocupa un lugar diferente dentro del orden musical."
+
+        },
+
+
+
+        {
+
+            tipo:"nota_explicacion",
+
+            nota:"G4",
+
+            nombre:"SOL",
+
+            texto:
+            "SOL completa nuestro primer grupo de cinco notas. Muchas melodías utilizan SOL como un punto importante de llegada."
+
+        },
+
+
+
+        {
+
+            tipo:"comparacion",
+
+            pregunta:
+            "Escuchá esta escala. ¿Qué sucede con las notas?",
+
+
+            ejemplos:[
+
+
+                {
+
+                    nombre:"Escala",
+
+                    melodia:[
+
+                        "C4",
+                        "D4",
+                        "E4",
+                        "F4",
+                        "G4"
+
+                    ]
+
+                }
+
+
+            ],
+
+
+            opciones:[
+
+                "Sube continuamente",
+
+                "Baja continuamente"
+
+            ],
+
+
+            correcta:0
+
+
+        },
+
+
+
+        {
+
+            tipo:"comparacion",
+
+            pregunta:
+            "¿Cuál nota está más lejos de DO?",
+
+
+            ejemplos:[
+
+
+                {
+
+                    nombre:"RE",
+
+                    notas:[
+                        "D4"
+                    ]
+
+                },
+
+
+                {
+
+                    nombre:"SOL",
+
+                    notas:[
+                        "G4"
+                    ]
+
+                }
+
+
+            ],
+
+
+            opciones:[
+
+                "RE",
+
+                "SOL"
+
+            ],
+
+
+            correcta:1
+
+
+        },
+
+
+
+        {
+
+            tipo:"piano_interactivo",
+
+            pregunta:
+            "Encontrá SOL en el piano.",
+
+            correcta:
+            "G"
+
+        },
+
+
+        {
+
+            tipo:"pentagrama_interactivo",
+
+            pregunta:
+            "Encontrá SOL en el pentagrama.",
+
+            correcta:
+            "G4"
+
+        }
+
+
+    ]
 
     },
 
+    {
+        id:"reconociendo_melodias",
+
+        titulo:"¿Reconocés la melodía?",
+
+        descripcion:
+        "Ahora las notas empiezan a formar canciones.",
+
+        pasos:[
+
+            {
+                tipo:"nota_explicacion",
+
+                nota:"A4",
+
+                nombre:"LA",
+
+                texto:
+                "Con LA ya tenemos seis notas distintas. A partir de ahora empezaremos a reconocer melodías completas."
+            },
+
+            {
+                tipo:"comparacion",
+
+                pregunta:
+                "Escuchá la melodía. ¿Cuál opción coincide exactamente?",
+
+                ejemplo:{
+
+                    nombre:"Melodía",
+
+                    melodia:[
+                        "C4",
+                        "D4",
+                        "E4",
+                        "G4",
+                        "A4"
+                    ]
+
+                },
+
+                opciones:[
+
+                    "DO RE MI SOL LA",
+
+                    "DO MI RE SOL LA"
+
+                ],
+
+                correcta:0
+
+            },
+
+            {
+                tipo:"piano_interactivo",
+
+                pregunta:"Encontrá LA en el piano.",
+
+                correcta:"A"
+
+            },
+
+            {
+                tipo:"pentagrama_interactivo",
+
+                pregunta:"Encontrá LA en el pentagrama.",
+
+                correcta:"A4"
+
+            }
+
+        ]
+
+    },
+
+    {
+        id:"la_nota_que_falta",
+
+        titulo:"La nota que falta",
+
+        descripcion:
+        "¿Podés completar una melodía?",
+
+        pasos:[
+
+            {
+                tipo:"comparacion",
+
+                pregunta:
+                "Escuchá la melodía. ¿Qué nota falta al final?",
+
+                ejemplo:{
+
+                    nombre:"Melodía",
+
+                    melodia:[
+                        "C4",
+                        "D4",
+                        "E4",
+                        "F4"
+                    ]
+
+                },
+
+                opciones:[
+
+                    "SOL",
+
+                    "RE"
+
+                ],
+
+                correcta:0
+
+            },
+
+            {
+                tipo:"comparacion",
+
+                pregunta:
+                "¿Qué dirección tiene la melodía?",
+
+                ejemplo:{
+
+                    nombre:"Melodía",
+
+                    melodia:[
+                        "A4",
+                        "G4",
+                        "F4",
+                        "E4"
+                    ]
+
+                },
+
+                opciones:[
+                    "Sube",
+                    "Baja"
+                ],
+
+                correcta:1
+
+            }
+
+        ]
+
+    },
+
+    {
+        id:"llega_si",
+
+        titulo:"La última pieza",
+
+        descripcion:
+        "Con SI completamos las siete notas musicales.",
+
+        pasos:[
+
+            {
+                tipo:"nota_explicacion",
+
+                nota:"B4",
+
+                nombre:"SI",
+
+                texto:
+                "SI completa el conjunto de las siete notas musicales."
+            },
+
+            {
+                tipo:"comparacion",
+
+                pregunta:
+                "¿Cuál es la nota más aguda?",
+
+                ejemplos:[
+
+                    {
+                        nombre:"SOL",
+                        notas:["G4"]
+                    },
+
+                    {
+                        nombre:"SI",
+                        notas:["B4"]
+                    }
+
+                ],
+
+                opciones:[
+                    "SOL",
+                    "SI"
+                ],
+
+                correcta:1
+
+            },
+
+            {
+                tipo:"piano_interactivo",
+
+                pregunta:"Encontrá SI.",
+
+                correcta:"B"
+
+            },
+
+            {
+                tipo:"pentagrama_interactivo",
+
+                pregunta:"Encontrá SI.",
+
+                correcta:"B4"
+
+            }
+
+        ]
+
+    },
+
+{
+    id:"detective_melodico",
+
+    titulo:"Detective melódico",
+
+    descripcion:"Ahora vas a investigar qué ocurre dentro de una melodía.",
+
+    pasos:[
+
+        {
+            tipo:"comparacion",
+
+            pregunta:"¿La melodía termina más arriba o más abajo de donde empezó?",
+
+            ejemplo:{
+                nombre:"Melodía",
+                melodia:[
+                    "C4",
+                    "E4",
+                    "D4",
+                    "G4"
+                ]
+            },
+
+            opciones:[
+                "Más arriba",
+                "Más abajo"
+            ],
+
+            correcta:0
+        },
+
+        {
+            tipo:"comparacion",
+
+            pregunta:"¿Cuál fue la nota más aguda?",
+
+            ejemplo:{
+                nombre:"Melodía",
+                melodia:[
+                    "C4",
+                    "E4",
+                    "D4",
+                    "G4"
+                ]
+            },
+
+            opciones:[
+                "MI",
+                "SOL"
+            ],
+
+            correcta:1
+        },
+
+        {
+            tipo:"comparacion",
+
+            pregunta:"¿Cuál fue la primera nota?",
+
+            ejemplo:{
+                nombre:"Melodía",
+                melodia:[
+                    "C4",
+                    "E4",
+                    "D4",
+                    "G4"
+                ]
+            },
+
+            opciones:[
+                "DO",
+                "MI"
+            ],
+
+            correcta:0
+        }
+
+    ]
+},
+
+{
+    id:"escalera_completa",
+
+    titulo:"La escalera completa",
+
+    descripcion:"Ya conocés todas las notas. Escuchá cómo forman una escala.",
+
+    pasos:[
+
+        {
+            tipo:"comparacion",
+
+            pregunta:"¿Qué escuchaste?",
+
+            ejemplo:{
+                nombre:"Escala",
+                melodia:[
+                    "C4",
+                    "D4",
+                    "E4",
+                    "F4",
+                    "G4",
+                    "A4",
+                    "B4",
+                    "C5"
+                ]
+            },
+
+            opciones:[
+                "Una escala",
+                "Una melodía cualquiera"
+            ],
+
+            correcta:0
+        },
+
+        {
+            tipo:"comparacion",
+
+            pregunta:"¿La escala sube o baja?",
+
+            ejemplo:{
+                nombre:"Escala",
+                melodia:[
+                    "C4",
+                    "D4",
+                    "E4",
+                    "F4",
+                    "G4",
+                    "A4",
+                    "B4",
+                    "C5"
+                ]
+            },
+
+            opciones:[
+                "Sube",
+                "Baja"
+            ],
+
+            correcta:0
+        },
+
+        {
+            tipo:"comparacion",
+
+            pregunta:"¿Cuál es la última nota?",
+
+            ejemplo:{
+                nombre:"Escala",
+                melodia:[
+                    "C4",
+                    "D4",
+                    "E4",
+                    "F4",
+                    "G4",
+                    "A4",
+                    "B4",
+                    "C5"
+                ]
+            },
+
+            opciones:[
+                "DO",
+                "SI"
+            ],
+
+            correcta:0
+        }
+
+    ]
+},
+
+{
+    id:"memoria_musical",
+
+    titulo:"Memoria musical",
+
+    descripcion:"Tu oído empieza a recordar patrones.",
+
+    pasos:[
+
+        {
+            tipo:"comparacion",
+
+            pregunta:"Escuchá la melodía. ¿Cuál opción es igual?",
+
+            ejemplo:{
+                nombre:"Original",
+                melodia:[
+                    "C4",
+                    "D4",
+                    "E4",
+                    "D4"
+                ]
+            },
+
+            opciones:[
+                "DO RE MI RE",
+                "DO MI RE MI"
+            ],
+
+            correcta:0
+        },
+
+        {
+            tipo:"comparacion",
+
+            pregunta:"¿Qué nota se repite?",
+
+            ejemplo:{
+                nombre:"Melodía",
+                melodia:[
+                    "C4",
+                    "D4",
+                    "E4",
+                    "D4"
+                ]
+            },
+
+            opciones:[
+                "RE",
+                "MI"
+            ],
+
+            correcta:0
+        }
+
+    ]
+},
+
+{
+    id:"melodias_famosas",
+
+    titulo:"¿Te suena?",
+
+    descripcion:"Algunas melodías son parte de nuestra memoria.",
+
+    pasos:[
+
+        {
+            tipo:"comparacion",
+
+            pregunta:"¿Qué melodía escuchaste?",
+
+            ejemplo:{
+                nombre:"Melodía",
+                melodia:[
+                    "C4",
+                    "C4",
+                    "G4",
+                    "G4",
+                    "A4",
+                    "A4",
+                    "G4"
+                ]
+            },
+
+            opciones:[
+                "Estrellita",
+                "Escala"
+            ],
+
+            correcta:0
+        }
+
+    ]
+},
+
+{
+    id:"el_impostor",
+
+    titulo:"El impostor",
+
+    descripcion:"Una de estas melodías cambió una sola nota.",
+
+    pasos:[
+
+        {
+            tipo:"memoria",
+
+            modo:"practica",
+
+            pregunta:
+            "Escuchá atentamente. ¿Cuál opción es exactamente igual?",
+
+            referencia:{
+                melodia:[
+                    "C4",
+                    "D4",
+                    "E4",
+                    "F4"
+                ]
+            },
+
+            opciones:[
+
+                {
+                    nombre:"A",
+                    melodia:[
+                        "C4",
+                        "D4",
+                        "E4",
+                        "F4"
+                    ]
+                },
+
+                {
+                    nombre:"B",
+                    melodia:[
+                        "C4",
+                        "D4",
+                        "G4",
+                        "F4"
+                    ]
+                }
+
+            ],
+
+            correcta:0
+        }
+
+    ]
+
+},
+
+{
+    id:"ascensor",
+
+    titulo:"El ascensor musical",
+
+    descripcion:"Seguí el movimiento de la melodía.",
+
+    pasos:[
+
+        {
+
+            tipo:"comparacion",
+
+            pregunta:"¿Qué hace esta melodía?",
+
+            ejemplo:{
+                nombre:"Melodía",
+
+                melodia:[
+                    "C4",
+                    "E4",
+                    "G4",
+                    "E4",
+                    "C4"
+                ]
+
+            },
+
+            opciones:[
+
+                "Sube y después baja",
+
+                "Baja todo el tiempo"
+
+            ],
+
+            correcta:0
+
+        },
+
+        {
+
+            tipo:"comparacion",
+
+            pregunta:"¿En qué nota estuvo el punto más alto?",
+
+            ejemplo:{
+                nombre:"Melodía",
+
+                melodia:[
+                    "C4",
+                    "E4",
+                    "G4",
+                    "E4",
+                    "C4"
+                ]
+
+            },
+
+            opciones:[
+
+                "MI",
+
+                "SOL"
+
+            ],
+
+            correcta:1
+
+        }
+
+    ]
+
+},
+
+{
+    id:"traductor",
+
+    titulo:"Traductor musical",
+
+    descripcion:"Una misma nota puede verse de distintas maneras.",
+
+    pasos:[
+
+        {
+
+            tipo:"nota_explicacion",
+
+            nota:"A4",
+
+            nombre:"LA",
+
+            texto:"Una misma nota puede escucharse, escribirse en un pentagrama o tocarse en un piano. Tu cerebro ya empieza a traducir automáticamente entre esos tres lenguajes."
+
+        },
+
+        {
+
+            tipo:"piano_interactivo",
+
+            pregunta:"Encontrá LA.",
+
+            correcta:"A"
+
+        },
+
+        {
+
+            tipo:"pentagrama_interactivo",
+
+            pregunta:"Ahora encontrá exactamente la misma nota en el pentagrama.",
+
+            correcta:"A4"
+
+        },
+
+        {
+
+            tipo:"comparacion",
+
+            pregunta:"¿Qué nota acabás de tocar?",
+
+            ejemplo:{
+                nombre:"Nota",
+                notas:["A4"]
+            },
+
+            opciones:[
+                "SOL",
+                "LA"
+            ],
+
+            correcta:1
+
+        }
+
+    ]
+
+},
+
+{
+    id:"eco",
+
+    titulo:"El eco",
+
+    descripcion:"Escuchá con atención y encontrá la misma melodía.",
+
+    pasos:[
+
+        {
+            tipo:"memoria",
+
+            modo:"practica",
+
+            pregunta:
+            "Escuchá la melodía. ¿Cuál opción es exactamente igual?",
+
+            referencia:{
+                melodia:[
+                    "E4",
+                    "F4",
+                    "G4",
+                    "F4"
+                ]
+            },
+
+            opciones:[
+
+                {
+                    nombre:"A",
+                    melodia:[
+                        "E4",
+                        "F4",
+                        "G4",
+                        "F4"
+                    ]
+                },
+
+                {
+                    nombre:"B",
+                    melodia:[
+                        "E4",
+                        "G4",
+                        "F4",
+                        "G4"
+                    ]
+                }
+
+            ],
+
+            correcta:0
+        }
+
+    ]
+
+},
+
+{
+    id:"frases",
+
+    titulo:"Las frases musicales",
+
+    descripcion:"Descubrí que las melodías también cuentan historias.",
+
+    xp:150,
+
+    pasos:[
+
+        {
+            tipo:"texto",
+
+            texto:"Una melodía no es solo una serie de notas. Igual que una frase hablada, tiene un comienzo, un camino y un final."
+        },
+
+
+        {
+            tipo:"comparacion",
+
+            pregunta:"¿Cuál melodía parece tener un final más claro?",
+
+            ejemplos:[
+
+                {
+                    nombre:"A",
+                    melodia:[
+                        "C4",
+                        "D4",
+                        "E4",
+                        "C4"
+                    ]
+                },
+
+                {
+                    nombre:"B",
+                    melodia:[
+                        "C4",
+                        "E4",
+                        "G4",
+                        "A4"
+                    ]
+                }
+
+            ],
+
+            opciones:[
+                "A",
+                "B"
+            ],
+
+            correcta:0
+        },
+
+
+        {
+            tipo:"comparacion",
+
+            pregunta:"¿Cuál parece una pregunta que necesita continuar?",
+
+            ejemplos:[
+
+                {
+                    nombre:"A",
+                    melodia:[
+                        "C4",
+                        "D4",
+                        "E4",
+                        "G4"
+                    ]
+                },
+
+                {
+                    nombre:"B",
+                    melodia:[
+                        "G4",
+                        "E4",
+                        "D4",
+                        "C4"
+                    ]
+                }
+
+            ],
+
+            opciones:[
+                "A",
+                "B"
+            ],
+
+            correcta:0
+        },
+
+
+        {
+            tipo:"memoria",
+
+            pregunta:"Escuchá esta frase musical. ¿Cuál opción es igual?",
+
+            referencia:{
+                melodia:[
+                    "C4",
+                    "E4",
+                    "D4",
+                    "G4"
+                ]
+            },
+
+            opciones:[
+
+                {
+                    nombre:"A",
+                    melodia:[
+                        "C4",
+                        "E4",
+                        "D4",
+                        "G4"
+                    ]
+                },
+
+                {
+                    nombre:"B",
+                    melodia:[
+                        "C4",
+                        "D4",
+                        "E4",
+                        "G4"
+                    ]
+                },
+
+                {
+                    nombre:"C",
+                    melodia:[
+                        "C4",
+                        "E4",
+                        "G4",
+                        "D4"
+                    ]
+                }
+
+            ],
+
+            correcta:0
+
+        },
+
+
+        {
+            tipo:"texto",
+
+            texto:"Ahora entendés algo fundamental: las notas son las letras, pero las melodías son las palabras. El lenguaje musical empieza a tomar forma."
+        }
+
+    ]
+
+},
+
+{
+    id:"boss2",
+
+    titulo:"👑 Guardián del Lenguaje Musical",
+
+    descripcion:
+    "Demostrá que ya dominás el lenguaje de las notas.",
+
+
+    xp:800,
+
+
+    pasos:[
+
+
+        {
+
+            tipo:"texto",
+
+            texto:
+            "Llegaste al desafío final. Durante este mundo descubriste que los sonidos tienen nombres, que las notas ocupan lugares en el piano y que también pueden escribirse en el pentagrama. Ahora tendrás que usar todo junto. El Guardián mezclará todos los desafíos. No busques recordar ejercicios: entendé el lenguaje."
+
+        },
+
+
+        {
+
+            tipo:"comparacion",
+
+            pregunta:
+            "Escuchá estas melodías. ¿Cuál sube continuamente?",
+
+
+            ejemplos:[
+
+                {
+
+                    nombre:"A",
+
+                    melodia:[
+
+                        "C4",
+                        "D4",
+                        "E4",
+                        "F4"
+
+                    ]
+
+                },
+
+
+                {
+
+                    nombre:"B",
+
+                    melodia:[
+
+                        "G4",
+                        "F4",
+                        "E4",
+                        "D4"
+
+                    ]
+
+                }
+
+            ],
+
+
+            opciones:[
+
+                "A",
+                "B"
+
+            ],
+
+
+            correcta:0
+
+        },
+
+
+
+        {
+
+            tipo:"identificar_nota",
+
+            modo:"pentagrama",
+
+            pregunta:
+            "Observá la nota escrita. ¿Qué nota es?",
+
+            nota:"C4",
+
+            opciones:[
+
+                "DO",
+                "RE",
+                "MI",
+                "SOL"
+
+            ],
+
+            correcta:0
+
+        },
+
+
+
+        {
+
+            tipo:"memoria",
+
+            modo:"examen",
+
+            pregunta:
+            "Escuchá atentamente. ¿Cuál melodía es exactamente igual?",
+
+
+            referencia:{
+
+                melodia:[
+
+                    "C4",
+                    "E4",
+                    "D4",
+                    "G4"
+
+                ]
+
+            },
+
+
+            opciones:[
+
+                {
+
+                    nombre:"A",
+
+                    melodia:[
+
+                        "C4",
+                        "E4",
+                        "D4",
+                        "G4"
+
+                    ]
+
+                },
+
+
+                {
+
+                    nombre:"B",
+
+                    melodia:[
+
+                        "C4",
+                        "D4",
+                        "E4",
+                        "G4"
+
+                    ]
+
+                },
+
+
+                {
+
+                    nombre:"C",
+
+                    melodia:[
+
+                        "E4",
+                        "D4",
+                        "C4",
+                        "G4"
+
+                    ]
+
+                }
+
+            ],
+
+
+            correcta:0
+
+        },
+
+
+
+        {
+
+            tipo:"identificar_nota",
+
+            modo:"piano",
+
+            pregunta:
+            "La tecla marcada tiene un sonido. ¿Qué nota es?",
+
+            nota:"G4",
+
+            opciones:[
+
+                "FA",
+                "SOL",
+                "LA",
+                "MI"
+
+            ],
+
+            correcta:1
+
+        },
+
+
+
+        {
+
+            tipo:"comparacion",
+
+            pregunta:
+            "¿Cuál nota está más aguda?",
+
+
+            ejemplos:[
+
+                {
+
+                    nombre:"A",
+
+                    notas:[
+
+                        "E4"
+
+                    ]
+
+                },
+
+
+                {
+
+                    nombre:"B",
+
+                    notas:[
+
+                        "A4"
+
+                    ]
+
+                }
+
+            ],
+
+
+            opciones:[
+
+                "A",
+                "B"
+
+            ],
+
+
+            correcta:1
+
+        },
+
+
+
+        {
+
+            tipo:"pentagrama_interactivo",
+
+            pregunta:
+            "Encontrá la nota MI en el pentagrama.",
+
+            correcta:"E4"
+
+        },
+
+
+
+        {
+
+            tipo:"identificar_nota",
+
+            modo:"pentagrama",
+
+            pregunta:
+            "Leé la nota escrita. ¿Cuál es?",
+
+            nota:"G4",
+
+            opciones:[
+
+                "MI",
+                "FA",
+                "SOL",
+                "LA"
+
+            ],
+
+            correcta:2
+
+        },
+
+
+
+        {
+
+            tipo:"comparacion",
+
+            pregunta:
+            "¿Cuál melodía repite una nota?",
+
+
+            ejemplos:[
+
+
+                {
+
+                    nombre:"A",
+
+                    melodia:[
+
+                        "C4",
+                        "D4",
+                        "D4",
+                        "E4"
+
+                    ]
+
+                },
+
+
+                {
+
+                    nombre:"B",
+
+                    melodia:[
+
+                        "C4",
+                        "D4",
+                        "E4",
+                        "F4"
+
+                    ]
+
+                }
+
+
+            ],
+
+
+            opciones:[
+
+                "A",
+                "B"
+
+            ],
+
+
+            correcta:0
+
+        },
+
+
+
+        {
+
+            tipo:"identificar_nota",
+
+            modo:"piano",
+
+            pregunta:
+            "¿Qué nota está marcada en el piano?",
+
+            nota:"B4",
+
+            opciones:[
+
+                "SOL",
+                "LA",
+                "SI",
+                "DO"
+
+            ],
+
+            correcta:2
+
+        },
+
+
+
+        {
+
+            tipo:"piano_interactivo",
+
+            pregunta:
+            "Encontrá SOL en el piano.",
+
+            correcta:"G"
+
+        },
+
+
+
+        {
+
+            tipo:"memoria",
+
+            modo:"examen",
+
+            pregunta:
+            "Escuchá la melodía. Una sola nota cambió. ¿Cuál opción es exactamente igual a la original?",
+
+
+            referencia:{
+
+                melodia:[
+
+                    "C4",
+                    "D4",
+                    "E4",
+                    "F4"
+
+                ]
+
+            },
+
+
+            opciones:[
+
+                {
+
+                    nombre:"A",
+
+                    melodia:[
+
+                        "C4",
+                        "D4",
+                        "E4",
+                        "F4"
+
+                    ]
+
+                },
+
+
+                {
+
+                    nombre:"B",
+
+                    melodia:[
+
+                        "C4",
+                        "D4",
+                        "F4",
+                        "F4"
+
+                    ]
+
+                },
+
+
+                {
+
+                    nombre:"C",
+
+                    melodia:[
+
+                        "C4",
+                        "E4",
+                        "E4",
+                        "F4"
+
+                    ]
+
+                }
+
+            ],
+
+
+            correcta:0
+
+        },
+
+
+
+        {
+
+            tipo:"identificar_nota",
+
+            modo:"pentagrama",
+
+            pregunta:
+            "Último desafío de lectura. ¿Qué nota aparece?",
+
+            nota:"A4",
+
+            opciones:[
+
+                "SOL",
+                "LA",
+                "SI",
+                "MI"
+
+            ],
+
+            correcta:1
+
+        },
+
+
+
+        {
+
+            tipo:"comparacion",
+
+            pregunta:
+            "¿Cuál melodía baja continuamente?",
+
+
+            ejemplos:[
+
+
+                {
+
+                    nombre:"A",
+
+                    melodia:[
+
+                        "G4",
+                        "F4",
+                        "E4",
+                        "D4"
+
+                    ]
+
+                },
+
+
+                {
+
+                    nombre:"B",
+
+                    melodia:[
+
+                        "C4",
+                        "D4",
+                        "E4",
+                        "F4"
+
+                    ]
+
+                }
+
+
+            ],
+
+
+            opciones:[
+
+                "A",
+                "B"
+
+            ],
+
+
+            correcta:0
+
+        },
+
+
+
+        {
+
+            tipo:"memoria",
+
+            modo:"examen",
+
+            pregunta:
+            "El último desafío. Escuchá la melodía completa y encontrá la correcta.",
+
+
+            referencia:{
+
+                melodia:[
+
+                    "C4",
+                    "E4",
+                    "G4",
+                    "E4",
+                    "D4"
+
+                ]
+
+            },
+
+
+            opciones:[
+
+
+                {
+
+                    nombre:"A",
+
+                    melodia:[
+
+                        "C4",
+                        "E4",
+                        "G4",
+                        "E4",
+                        "D4"
+
+                    ]
+
+                },
+
+
+                {
+
+                    nombre:"B",
+
+                    melodia:[
+
+                        "C4",
+                        "D4",
+                        "G4",
+                        "E4",
+                        "D4"
+
+                    ]
+
+                },
+
+
+                {
+
+                    nombre:"C",
+
+                    melodia:[
+
+                        "E4",
+                        "G4",
+                        "E4",
+                        "D4",
+                        "C4"
+
+                    ]
+
+                }
+
+            ],
+
+
+            correcta:0
+
+        },
+
+
+
+        {
+
+            tipo:"texto",
+
+            texto:
+            "¡Excelente! Ya conocés las letras del lenguaje musical. Podés reconocer sonidos, identificar notas escritas, ubicarlas en el piano y relacionarlas con lo que escuchás. Ahora tenés las herramientas básicas para empezar a descubrir cómo las notas se organizan entre sí. En el próximo mundo aprenderás cómo esas letras forman escalas y nuevas relaciones musicales."
+
+        }
+
+
+    ]
+
+}
+
+
+
+    ]
+
+    },
 
     mundo3:{
 
@@ -2830,7 +5009,10 @@ const DB_MUNDOS = {
 
         ],
 
-        misiones:[]
+        misiones:[
+
+
+        ]
 
     }
 
