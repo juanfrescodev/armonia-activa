@@ -3022,6 +3022,44 @@ mundo2:{
 
 },
 
+{
+
+    id:"detras_1",
+
+    titulo:"🎼 Detrás de la música",
+
+    descripcion:
+    "¿Hace falta tener un don para aprender música?",
+
+    pasos:[
+
+        {
+
+            tipo:"detras_de_la_musica",
+
+            titulo:"¿Y si me equivoco?",
+
+            texto:[
+
+                "Es normal que todavía confundas algunas notas. De hecho, eso es exactamente lo que esperamos.",
+
+                "En este curso no estamos entrenando el oído absoluto. Estamos entrenando algo mucho más útil: aprender a comparar sonidos y descubrir sus diferencias.",
+
+                "Cada vez que dudás o te equivocás, tu cerebro está construyendo nuevas referencias."
+
+            ],
+
+            frase:
+            "Equivocarte también es aprender."
+
+        }
+
+    ],
+
+    xp:25
+
+},
+
 
 
 
@@ -3200,12 +3238,53 @@ mundo2:{
             correcta:
             "G4"
 
-        }
+        },
+        
 
 
     ]
 
     },
+
+{
+
+    id:"detras_2",
+
+    titulo:"🎼 Detrás de la música",
+
+    descripcion:
+    "El oído absoluto no es obligatorio.",
+
+    pasos:[
+
+        {
+
+            tipo:"detras_de_la_musica",
+
+            titulo:"El mito del oído absoluto",
+
+            texto:[
+
+                "Muchas personas creen que todos los músicos escuchan una nota y saben inmediatamente si es un DO o un SOL.",
+
+                "La realidad es muy distinta. Esa habilidad existe, pero es extremadamente poco frecuente.",
+
+                "La enorme mayoría de los músicos profesionales nunca tuvo oído absoluto."
+
+            ],
+
+            frase:
+            "Lo importante no es reconocer una nota aislada. Lo importante es comprender cómo se relaciona con las demás."
+
+        }
+
+    ],
+
+    xp:25
+
+},
+
+
 
     {
         id:"reconociendo_melodias",
@@ -3426,6 +3505,44 @@ mundo2:{
         ]
 
     },
+
+{
+
+    id:"detras_3",
+
+    titulo:"🎼 Detrás de la música",
+
+    descripcion:
+    "Aprender música se parece mucho a aprender un idioma.",
+
+    pasos:[
+
+        {
+
+            tipo:"detras_de_la_musica",
+
+            titulo:"Todavía estamos aprendiendo las letras",
+
+            texto:[
+
+                "Cuando aprendiste a leer tampoco conocías todas las letras desde el primer día.",
+
+                "Primero aprendiste sus formas. Después sus nombres. Mucho más adelante empezaste a formar palabras.",
+
+                "Con la música ocurre exactamente lo mismo."
+
+            ],
+
+            frase:
+            "Hoy aprendemos las letras. Las palabras llegarán muy pronto."
+
+        }
+
+    ],
+
+    xp:25
+
+},
 
 {
     id:"detective_melodico",
@@ -3657,6 +3774,46 @@ mundo2:{
         }
 
     ]
+},
+
+{
+
+    id:"detras_4",
+
+    titulo:"🎼 Detrás de la música",
+
+    descripcion:
+    "No hace falta tener un oído perfecto para hacer historia.",
+
+    pasos:[
+
+        {
+
+            tipo:"detras_de_la_musica",
+
+            titulo:"Paul McCartney",
+
+            texto:[
+
+                "Paul McCartney contó en distintas entrevistas que no tiene oído absoluto.",
+
+                "Sin embargo escribió algunas de las canciones más famosas de la historia junto a The Beatles.",
+
+                "Lo importante no era reconocer una nota cualquiera. Lo importante era escuchar cómo las notas funcionaban juntas."
+
+            ],
+
+            video:"https://www.youtube.com/embed/YvUokNsu2Dw",
+
+            frase:
+            "La música no depende de un don. Depende de entrenar el oído."
+
+        }
+
+    ],
+
+    xp:25
+
 },
 
 {
@@ -4105,6 +4262,46 @@ mundo2:{
         }
 
     ]
+
+},
+
+{
+
+    id:"detras_5",
+
+    titulo:"🎼 Detrás de la música",
+
+    descripcion:
+    "Antes del desafío final.",
+
+    pasos:[
+
+        {
+
+            tipo:"detras_de_la_musica",
+
+            titulo:"Mirá todo lo que avanzaste",
+
+            texto:[
+
+                "Cuando comenzaste este mundo, las notas eran solo nombres desconocidos.",
+
+                "Hoy ya podés reconocerlas en el piano, encontrarlas en el pentagrama y relacionarlas con los sonidos que escuchás.",
+
+                "Todavía no esperamos que identifiques cualquier nota de oído. Ese nunca fue el objetivo.",
+
+                "Lo importante es que ahora entendés el lenguaje con el que se escribe toda la música."
+
+            ],
+
+            frase:
+            "Respirá hondo. Ya tenés todo lo necesario para enfrentar al Guardián del Lenguaje Musical."
+
+        }
+
+    ],
+
+    xp:25
 
 },
 
