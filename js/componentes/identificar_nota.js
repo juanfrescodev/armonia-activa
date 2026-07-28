@@ -2,7 +2,8 @@ COMPONENTES.identificar_nota = function(
     paso,
     contenedor,
     motor,
-    render
+    render,
+    mision
 ){
 
 
@@ -64,7 +65,8 @@ COMPONENTES.identificar_nota = function(
         card.appendChild(
 
             COMPONENTES.teclado(
-                paso.nota
+                paso.nota,
+                mision.id.startsWith("boss")
             )
 
         );

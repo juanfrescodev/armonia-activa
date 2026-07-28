@@ -1,4 +1,4 @@
-const DATOS_NOTAS = {
+window.DATOS_NOTAS = {
 
 
     posicionesPentagrama:{
@@ -11,6 +11,7 @@ const DATOS_NOTAS = {
         G4:100,
         A4:90,
         B4:80,
+
         C5:70,
         D5:60,
         E5:50
@@ -23,38 +24,66 @@ const DATOS_NOTAS = {
 
 
         {
-            nombre:"C",
-            nota:"C4"
+            nombre:"Do",
+            internacional:"C",
+            nota:"C4",
+            semitonos:0
         },
 
-        {
-            nombre:"D",
-            nota:"D4"
-        },
 
         {
-            nombre:"E",
-            nota:"E4"
+            nombre:"Re",
+            internacional:"D",
+            nota:"D4",
+            semitonos:2
         },
 
-        {
-            nombre:"F",
-            nota:"F4"
-        },
 
         {
-            nombre:"G",
-            nota:"G4"
+            nombre:"Mi",
+            internacional:"E",
+            nota:"E4",
+            semitonos:4
         },
 
-        {
-            nombre:"A",
-            nota:"A4"
-        },
 
         {
-            nombre:"B",
-            nota:"B4"
+            nombre:"Fa",
+            internacional:"F",
+            nota:"F4",
+            semitonos:5
+        },
+
+
+        {
+            nombre:"Sol",
+            internacional:"G",
+            nota:"G4",
+            semitonos:7
+        },
+
+
+        {
+            nombre:"La",
+            internacional:"A",
+            nota:"A4",
+            semitonos:9
+        },
+
+
+        {
+            nombre:"Si",
+            internacional:"B",
+            nota:"B4",
+            semitonos:11
+        },
+
+
+        {
+            nombre:"Do",
+            internacional:"C",
+            nota:"C5",
+            semitonos:12
         }
 
 

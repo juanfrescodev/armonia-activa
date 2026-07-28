@@ -146,30 +146,75 @@ COMPONENTES.comparacion = function(
 
 
 
-                setTimeout(()=>{
+                if(paso.explicacion){
+
+                    const texto =
+                    document.createElement("div");
+
+                    texto.className =
+                    "mt-6 p-4 rounded-xl bg-emerald-900/40 border border-emerald-600 text-emerald-200";
+
+                    texto.innerText =
+                    paso.explicacion;
+
+                    contenedor.appendChild(texto);
 
 
-                    motor.siguientePaso();
+                    const continuar =
+                    document.createElement("button");
 
+                    continuar.className =
+                    `
+                    w-full
+                    mt-4
+                    p-4
+                    rounded-xl
+                    bg-indigo-600
+                    hover:bg-indigo-500
+                    font-bold
+                    `;
 
+                    continuar.innerText =
+                    "Continuar";
 
-                    if(motor.termino()){
+                    continuar.onclick=()=>{
 
+                        motor.siguientePaso();
 
-                        terminarMision();
+                        if(motor.termino()){
 
+                            terminarMision();
 
-                    }else{
+                        }else{
 
+                            render();
 
-                        render();
+                        }
 
+                    };
 
-                    }
+                    contenedor.appendChild(continuar);
 
+                }
+                else{
 
+                    setTimeout(()=>{
 
-                },1000);
+                        motor.siguientePaso();
+
+                        if(motor.termino()){
+
+                            terminarMision();
+
+                        }else{
+
+                            render();
+
+                        }
+
+                    },1000);
+
+                }
 
 
 

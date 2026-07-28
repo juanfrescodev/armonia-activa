@@ -1,7 +1,10 @@
-//teclado.js
+// teclado.js
 
 
-COMPONENTES.teclado = function(notaActual){
+COMPONENTES.teclado = function(
+    notaActual,
+    examen=false
+){
 
 
     const contenedor =
@@ -33,10 +36,15 @@ COMPONENTES.teclado = function(notaActual){
 
 
     const teclasBlancas =
+
     DATOS_NOTAS.teclado.map(nota=>[
+
         nota.nota,
         nota.nombre
+
     ]);
+
+
 
 
 
@@ -47,12 +55,20 @@ COMPONENTES.teclado = function(notaActual){
         document.createElement("div");
 
 
-        tecla.innerText =
-        item[1];
-
 
         tecla.dataset.nota =
         item[0];
+
+
+
+        // Mostrar nombres solamente si NO es examen
+
+        if(!examen){
+
+            tecla.innerText =
+            item[1];
+
+        }
 
 
 
@@ -74,54 +90,75 @@ COMPONENTES.teclado = function(notaActual){
 
 
 
-        if(item[0].trim() === notaActual.trim()){
+        if(
+            item[0].trim()
+            ===
+            notaActual.trim()
+        ){
+
 
             tecla.classList.remove(
                 "bg-white"
             );
 
+
             tecla.classList.add(
                 "bg-indigo-400"
             );
 
+
         }
 
 
-        teclado.appendChild(tecla);
+
+        teclado.appendChild(
+            tecla
+        );
 
 
     });
 
 
 
+
+
+
     const teclasNegras = [
+
 
         {
             nota:"C#4",
             izquierda:34
         },
 
+
         {
             nota:"D#4",
             izquierda:82
         },
+
 
         {
             nota:"F#4",
             izquierda:178
         },
 
+
         {
             nota:"G#4",
             izquierda:226
         },
+
 
         {
             nota:"A#4",
             izquierda:274
         }
 
+
     ];
+
+
 
 
 
@@ -155,7 +192,13 @@ COMPONENTES.teclado = function(notaActual){
         item.izquierda+"px";
 
 
-        if(item.nota.trim() === notaActual.trim()){
+
+
+        if(
+            item.nota.trim()
+            ===
+            notaActual.trim()
+        ){
 
 
             tecla.classList.remove(
@@ -172,18 +215,26 @@ COMPONENTES.teclado = function(notaActual){
 
 
 
-        teclado.appendChild(tecla);
+        teclado.appendChild(
+            tecla
+        );
+
 
 
     });
 
 
 
-    contenedor.appendChild(teclado);
+
+
+    contenedor.appendChild(
+        teclado
+    );
 
 
 
     return contenedor;
+
 
 
 };
