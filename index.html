@@ -11,69 +11,1261 @@
 
 <script src="https://cdn.tailwindcss.com"></script>
 
+<style>
+
+    .onda {
+
+        position: absolute;
+
+        width: 260px;
+        height: 260px;
+
+        border: 1px solid rgba(129, 140, 248, 0.16);
+
+        border-radius: 50%;
+
+        animation: expandirOnda 7s ease-in-out infinite;
+
+    }
+
+
+    .onda-1 {
+
+        animation-delay: 0s;
+
+    }
+
+
+    .onda-2 {
+
+        width: 380px;
+        height: 380px;
+
+        animation-delay: 1.4s;
+
+    }
+
+
+    .onda-3 {
+
+        width: 500px;
+        height: 500px;
+
+        animation-delay: 2.8s;
+
+    }
+
+
+    .onda-4 {
+
+        width: 640px;
+        height: 640px;
+
+        animation-delay: 4.2s;
+
+    }
+
+
+    @keyframes expandirOnda {
+
+        0% {
+
+            transform: scale(0.82);
+
+            opacity: 0.15;
+
+        }
+
+        50% {
+
+            transform: scale(1);
+
+            opacity: 0.45;
+
+        }
+
+        100% {
+
+            transform: scale(0.82);
+
+            opacity: 0.15;
+
+        }
+
+    }
+
+
+</style>
+
 <script src="data/misiones.js"></script>
+
+
+<style>
+
+/* =========================================================
+   ARMONÍA ACTIVA — IDENTIDAD VISUAL
+   ========================================================= */
+
+:root {
+
+    --fondo: #050816;
+    --fondo-2: #0b1020;
+
+    --acento: #818cf8;
+    --acento-brillante: #a5b4fc;
+
+    --texto: #f8fafc;
+    --texto-suave: #94a3b8;
+
+    --borde: rgba(255,255,255,0.08);
+
+}
+
+
+/* ---------------------------------------------------------
+   BASE
+   --------------------------------------------------------- */
+
+* {
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    margin: 0;
+
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(99,102,241,0.20),
+            transparent 38%
+        ),
+
+        radial-gradient(
+            circle at 0% 40%,
+            rgba(79,70,229,0.08),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            180deg,
+            #080c19 0%,
+            #050816 50%,
+            #03040a 100%
+        );
+
+    color: var(--texto);
+
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    min-height: 100vh;
+
+    padding-bottom: 110px;
+
+}
+
+
+/* ---------------------------------------------------------
+   LUCES DECORATIVAS
+   --------------------------------------------------------- */
+
+.ambient-light {
+
+    position: fixed;
+
+    width: 320px;
+    height: 320px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(99,102,241,0.10),
+            transparent 70%
+        );
+
+    pointer-events: none;
+
+    filter: blur(10px);
+
+    z-index: 0;
+
+}
+
+
+.ambient-light.one {
+
+    top: -120px;
+    left: -100px;
+
+}
+
+
+.ambient-light.two {
+
+    top: 40%;
+    right: -160px;
+
+}
+
+
+/* ---------------------------------------------------------
+   CONTENEDOR
+   --------------------------------------------------------- */
+
+.app-container {
+
+    position: relative;
+
+    z-index: 1;
+
+    width: 100%;
+
+    max-width: 720px;
+
+    margin: auto;
+
+}
+
+
+/* ---------------------------------------------------------
+   HEADER
+   --------------------------------------------------------- */
+
+.hero {
+
+    padding:
+
+        42px
+        24px
+        30px;
+
+}
+
+
+.logo-small {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.16em;
+
+    text-transform: uppercase;
+
+    color: var(--acento-brillante);
+
+    margin-bottom: 18px;
+
+}
+
+
+.logo-dot {
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--acento);
+
+    box-shadow:
+        0 0 12px rgba(129,140,248,0.9);
+
+}
+
+
+.hero h1 {
+
+    margin: 0;
+
+    font-size: clamp(2.5rem, 10vw, 4rem);
+
+    line-height: 0.95;
+
+    letter-spacing: -0.055em;
+
+    font-weight: 800;
+
+}
+
+
+.hero h1 span {
+
+    display: block;
+
+    background:
+        linear-gradient(
+            110deg,
+            #ffffff,
+            #c7d2fe 55%,
+            #818cf8
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+    color: transparent;
+
+}
+
+
+.hero-subtitle {
+
+    margin-top: 20px;
+
+    max-width: 540px;
+
+    color: var(--texto-suave);
+
+    font-size: 16px;
+
+    line-height: 1.6;
+
+}
+
+
+/* ---------------------------------------------------------
+   MINI ESTADO
+   --------------------------------------------------------- */
+
+.status-card {
+
+    margin-top: 28px;
+
+    padding: 18px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(99,102,241,0.14),
+            rgba(15,23,42,0.60)
+        );
+
+    border: 1px solid rgba(129,140,248,0.16);
+
+    backdrop-filter: blur(16px);
+
+}
+
+
+.status-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 12px;
+
+}
+
+
+.status-label {
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+
+    color: #a5b4fc;
+
+}
+
+
+.status-number {
+
+    font-size: 13px;
+
+    color: #cbd5e1;
+
+}
+
+
+.progress {
+
+    height: 7px;
+
+    width: 100%;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: rgba(255,255,255,0.06);
+
+}
+
+
+.progress-bar {
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #6366f1,
+            #a5b4fc
+        );
+
+    box-shadow:
+        0 0 14px rgba(99,102,241,0.45);
+
+    transition:
+        width 700ms cubic-bezier(.2,.8,.2,1);
+
+}
+
+
+/* ---------------------------------------------------------
+   TITULO SECCIÓN
+   --------------------------------------------------------- */
+
+.section-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: end;
+
+    padding:
+
+        10px
+        24px
+        16px;
+
+}
+
+
+.section-header h2 {
+
+    margin: 0;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #e2e8f0;
+
+}
+
+
+.section-header p {
+
+    margin: 0;
+
+    font-size: 12px;
+
+    color: #64748b;
+
+}
+
+
+/* ---------------------------------------------------------
+   MUNDOS
+   --------------------------------------------------------- */
+
+#lista {
+
+    padding:
+
+        0
+        20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+
+}
+
+
+/* ---------------------------------------------------------
+   CARD MUNDO
+   --------------------------------------------------------- */
+
+.world-card {
+
+    position: relative;
+
+    display: block;
+
+    padding: 20px;
+
+    border-radius: 24px;
+
+    text-decoration: none;
+
+    color: inherit;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(30,41,59,0.72),
+            rgba(15,23,42,0.58)
+        );
+
+    border: 1px solid var(--borde);
+
+    backdrop-filter: blur(18px);
+
+    transition:
+
+        transform 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease,
+        box-shadow 180ms ease;
+
+}
+
+
+.world-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 0% 0%,
+            rgba(129,140,248,0.12),
+            transparent 45%
+        );
+
+    opacity: 0;
+
+    transition: opacity 200ms ease;
+
+    pointer-events: none;
+
+}
+
+
+.world-card:hover {
+
+    transform:
+        translateY(-3px);
+
+    border-color:
+        rgba(129,140,248,0.28);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(37,48,76,0.82),
+            rgba(15,23,42,0.68)
+        );
+
+    box-shadow:
+        0 16px 40px rgba(0,0,0,0.25);
+
+}
+
+
+.world-card:hover::before {
+
+    opacity: 1;
+
+}
+
+
+.world-card:active {
+
+    transform:
+        translateY(-1px)
+        scale(0.99);
+
+}
+
+
+/* ---------------------------------------------------------
+   CARD DESBLOQUEADA
+   --------------------------------------------------------- */
+
+.world-card.locked {
+
+    filter: saturate(0.55);
+
+    opacity: 0.52;
+
+}
+
+
+.world-card.locked:hover {
+
+    transform: none;
+
+    box-shadow: none;
+
+    border-color: var(--borde);
+
+}
+
+
+/* ---------------------------------------------------------
+   PARTE SUPERIOR CARD
+   --------------------------------------------------------- */
+
+.world-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 16px;
+
+}
+
+
+.world-number {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.world-icon {
+
+    width: 44px;
+    height: 44px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 15px;
+
+    font-size: 20px;
+
+    background:
+        rgba(99,102,241,0.10);
+
+    border:
+        1px solid rgba(129,140,248,0.12);
+
+}
+
+
+.world-card h3 {
+
+    margin: 0;
+
+    font-size: 17px;
+
+    font-weight: 750;
+
+    letter-spacing: -0.02em;
+
+}
+
+
+.world-state {
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 14px;
+
+    background:
+        rgba(255,255,255,0.05);
+
+    color: #94a3b8;
+
+}
+
+
+.world-state.completed {
+
+    background:
+        rgba(16,185,129,0.12);
+
+    color: #6ee7b7;
+
+    border:
+        1px solid rgba(16,185,129,0.18);
+
+}
+
+
+/* ---------------------------------------------------------
+   DESCRIPCIÓN
+   --------------------------------------------------------- */
+
+.world-description {
+
+    margin:
+
+        15px
+        0
+        16px
+        56px;
+
+    font-size: 13px;
+
+    line-height: 1.55;
+
+    color: #94a3b8;
+
+}
+
+
+/* ---------------------------------------------------------
+   FOOTER CARD
+   --------------------------------------------------------- */
+
+.world-footer {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-left: 56px;
+
+    padding-top: 13px;
+
+    border-top:
+        1px solid rgba(255,255,255,0.05);
+
+}
+
+
+.world-action {
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    color: #a5b4fc;
+
+}
+
+
+.world-card.locked .world-action {
+
+    color: #64748b;
+
+}
+
+
+.world-arrow {
+
+    color: #64748b;
+
+    transition:
+        transform 180ms ease,
+        color 180ms ease;
+
+}
+
+
+.world-card:hover .world-arrow {
+
+    transform:
+        translateX(4px);
+
+    color: #a5b4fc;
+
+}
+
+
+/* ---------------------------------------------------------
+   NAVEGACIÓN INFERIOR
+   --------------------------------------------------------- */
+
+.bottom-nav {
+
+    position: fixed;
+
+    z-index: 50;
+
+    bottom: 14px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width:
+        calc(100% - 28px);
+
+    max-width: 500px;
+
+    padding: 8px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 6px;
+
+    border-radius: 22px;
+
+    background:
+        rgba(10,15,30,0.82);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter:
+        blur(20px);
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,0.45);
+
+}
+
+
+.nav-item {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    min-height: 58px;
+
+    border-radius: 16px;
+
+    text-decoration: none;
+
+    color: #64748b;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    transition:
+        background 180ms ease,
+        color 180ms ease,
+        transform 180ms ease;
+
+}
+
+
+.nav-icon {
+
+    font-size: 19px;
+
+}
+
+
+.nav-item:hover {
+
+    color: #c7d2fe;
+
+    background:
+        rgba(129,140,248,0.08);
+
+}
+
+
+.nav-item.active {
+
+    color: #c7d2fe;
+
+    background:
+        rgba(99,102,241,0.13);
+
+    box-shadow:
+        inset 0 0 0 1px
+        rgba(129,140,248,0.10);
+
+}
+
+
+/* ---------------------------------------------------------
+   ENTRADA
+   --------------------------------------------------------- */
+
+@keyframes entrada {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(12px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+.animate-entry {
+
+    animation:
+        entrada 600ms
+        cubic-bezier(.2,.8,.2,1)
+        both;
+
+}
+
+
+.delay-1 {
+
+    animation-delay: 80ms;
+
+}
+
+
+.delay-2 {
+
+    animation-delay: 160ms;
+
+}
+
+
+.delay-3 {
+
+    animation-delay: 240ms;
+
+}
+
+
+/* ---------------------------------------------------------
+   RESPUESTAS PARA PANTALLAS GRANDES
+   --------------------------------------------------------- */
+
+@media (min-width: 768px) {
+
+    .hero {
+
+        padding-top: 70px;
+
+    }
+
+    #lista {
+
+        padding-left: 0;
+        padding-right: 0;
+
+    }
+
+    .section-header {
+
+        padding-left: 0;
+        padding-right: 0;
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   REDUCIR MOVIMIENTO SI EL USUARIO LO PREFIERE
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+
+    }
+
+}
+
+</style>
 
 </head>
 
 
-<body class="bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-800 via-[#0a0f1c] to-black text-white min-h-screen pb-24">
+<body>
+
+
+<div class="ambient-light one"></div>
+
+<div class="ambient-light two"></div>
 
 
 
-<header class="p-6 text-center border-b border-white/10">
+<div class="app-container">
 
 
-<h1 class="text-3xl font-bold text-indigo-400">
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
 
-Armonía Activa
+    <header class="relative overflow-hidden min-h-[520px] flex items-center justify-center border-b border-white/10">
 
-</h1>
-
-
-<p class="text-slate-400 mt-2">
-
-Tu camino para aprender música
-
-</p>
+        <!-- Fondo atmosférico -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(99,102,241,0.20),transparent_45%),radial-gradient(circle_at_20%_80%,rgba(139,92,246,0.12),transparent_35%),linear-gradient(to_bottom,#111827,#070b14_70%,#03050a)]">
+        </div>
 
 
-</header>
+        <!-- Halo central -->
+        <div class="absolute top-20 left-1/2 -translate-x-1/2 w-72 h-72 bg-indigo-500/10 rounded-full blur-3xl">
+        </div>
+
+
+        <!-- Visualización sonora -->
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-60">
+
+            <div class="onda onda-1"></div>
+            <div class="onda onda-2"></div>
+            <div class="onda onda-3"></div>
+            <div class="onda onda-4"></div>
+
+        </div>
+
+
+        <!-- Partículas decorativas -->
+        <div class="absolute top-24 left-[15%] w-1 h-1 bg-indigo-300 rounded-full animate-pulse">
+        </div>
+
+        <div class="absolute top-40 right-[18%] w-1.5 h-1.5 bg-violet-300 rounded-full animate-pulse">
+        </div>
+
+        <div class="absolute bottom-28 left-[25%] w-1 h-1 bg-indigo-400 rounded-full animate-pulse">
+        </div>
+
+        <div class="absolute bottom-36 right-[28%] w-1 h-1 bg-purple-300 rounded-full animate-pulse">
+        </div>
+
+
+        <!-- Contenido -->
+        <div class="relative z-10 max-w-3xl mx-auto px-6 text-center">
+
+            <!-- Marca -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 mb-7 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-xs tracking-[0.25em] uppercase text-indigo-300">
+
+                <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span>
+
+                Entrenamiento musical
+
+            </div>
+
+
+            <!-- Título -->
+            <h1 class="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight">
+
+                <span class="text-white">
+                    Armonía
+                </span>
+
+                <span class="bg-gradient-to-r from-indigo-300 via-violet-400 to-indigo-300 bg-clip-text text-transparent">
+                    Activa
+                </span>
+
+            </h1>
+
+
+            <!-- Subtítulo -->
+            <p class="mt-6 text-lg sm:text-xl text-slate-300 max-w-xl mx-auto leading-relaxed">
+
+                Escuchá.
+                Entendé.
+                <span class="text-white font-semibold">
+                    Hacé música.
+                </span>
+
+            </p>
+
+
+            <!-- Descripción -->
+            <p class="mt-4 text-sm sm:text-base text-slate-500 max-w-lg mx-auto">
+
+                Un recorrido interactivo para desarrollar tu oído,
+                comprender el lenguaje musical y pensar la música de otra manera.
+
+            </p>
+
+
+            <!-- Mini indicador -->
+            <div class="mt-10 flex justify-center">
+
+                <div class="inline-flex items-center gap-4 px-5 py-3 rounded-2xl bg-black/30 border border-white/10 backdrop-blur-md">
+
+                    <div class="text-left">
+
+                        <p class="text-[10px] uppercase tracking-widest text-slate-500">
+                            Tu recorrido
+                        </p>
+
+                        <p class="text-sm font-semibold text-slate-200">
+                            La música empieza escuchando
+                        </p>
+
+                    </div>
+
+                    <div class="text-indigo-400 text-xl">
+                        ♪
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Indicador de scroll -->
+            <div class="mt-12 flex flex-col items-center gap-2 text-slate-600">
+
+                <span class="text-[10px] uppercase tracking-[0.3em]">
+                    Tu viaje comienza acá
+                </span>
+
+                <span class="text-lg animate-bounce">
+                    ↓
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
 
 
 
+    <!-- =====================================================
+         SECCIÓN MUNDOS
+         ===================================================== -->
 
-<main
-id="lista"
-class="max-w-md mx-auto p-6 space-y-6">
-
-</main>
-
-
+    <div
+        class="section-header animate-entry delay-1">
 
 
+        <div>
 
-<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-[#0a0f1c]/90 border-t border-white/10 flex justify-around py-4">
+            <h2>
 
+                Tu recorrido
 
-<a href="index.html">
+            </h2>
 
-🗺️ Ruta
-
-</a>
-
-
-<a href="lab.html">
-
-🎹 Lab
-
-</a>
+        </div>
 
 
-<a href="perfil.html">
+        <p id="contadorMundos">
 
-👤 Perfil
+            0 mundos
 
-</a>
+        </p>
+
+
+    </div>
+
+
+
+    <main
+        id="lista"
+        class="animate-entry delay-2">
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     NAVEGACIÓN
+     ========================================================= -->
+
+<nav class="fixed bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-md bg-[#0a0f1c]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl z-50">
+
+<div class="flex justify-around items-center py-3 px-3">
+
+    <a
+        href="index.html"
+        class="flex flex-col items-center gap-1 px-5 py-1 text-sm text-slate-300 hover:text-white transition"
+    >
+        <span class="text-xl">🗺️</span>
+        <span>Ruta</span>
+    </a>
+
+    <a
+        href="lab.html"
+        class="flex flex-col items-center gap-1 px-5 py-1 text-sm text-slate-300 hover:text-white transition"
+    >
+        <span class="text-xl">🎹</span>
+        <span>Lab</span>
+    </a>
+
+    <a
+        href="perfil.html"
+        class="flex flex-col items-center gap-1 px-5 py-1 text-sm text-slate-300 hover:text-white transition"
+    >
+        <span class="text-xl">👤</span>
+        <span>Perfil</span>
+    </a>
+
+</div>
 
 
 </nav>
@@ -84,215 +1276,319 @@ class="max-w-md mx-auto p-6 space-y-6">
 
 <script>
 
-
+/* =========================================================
+   DATOS DE PROGRESO
+   ========================================================= */
 
 const lista =
-document.getElementById("lista");
-
+    document.getElementById("lista");
 
 
 const mundosCompletados =
-JSON.parse(
-localStorage.getItem("mundosCompletados") || "[]"
+    JSON.parse(
+        localStorage.getItem(
+            "mundosCompletados"
+        ) || "[]"
+    );
+
+
+/* =========================================================
+   OBTENER MUNDOS
+   ========================================================= */
+
+const todosLosMundos =
+    Object.values(DB_MUNDOS);
+
+
+const cantidadMundos =
+    todosLosMundos.length;
+
+
+const cantidadCompletados =
+    todosLosMundos.filter(
+        mundo =>
+            mundosCompletados.includes(
+                mundo.id
+            )
+    ).length;
+
+
+/* =========================================================
+   ACTUALIZAR CONTADOR
+   ========================================================= */
+
+const contador =
+    document.getElementById(
+        "contadorMundos"
+    );
+
+
+contador.innerText =
+    cantidadCompletados +
+    " / " +
+    cantidadMundos +
+    " completados";
+
+
+/* =========================================================
+   CREAR CARDS DE LOS MUNDOS
+   ========================================================= */
+
+todosLosMundos.forEach(
+    (mundo, index) => {
+
+
+        /* -------------------------------------------------
+           ESTADO
+           ------------------------------------------------- */
+
+        const completado =
+            mundosCompletados.includes(
+                mundo.id
+            );
+
+
+        const numeroMundo =
+            parseInt(
+                mundo.id.replace(
+                    "mundo",
+                    ""
+                )
+            );
+
+
+        const desbloqueado =
+            numeroMundo === 1 ||
+            mundosCompletados.includes(
+                "mundo" +
+                (numeroMundo - 1)
+            );
+
+
+        /* -------------------------------------------------
+           CREAR CARD
+           ------------------------------------------------- */
+
+        const card =
+            document.createElement("a");
+
+
+        card.href =
+            `mundo.html?id=${mundo.id}`;
+
+
+        card.className =
+            "world-card " +
+            (
+                !desbloqueado
+                    ? "locked "
+                    : ""
+            ) +
+            "animate-entry";
+
+
+        card.style.animationDelay =
+            (300 + index * 70) + "ms";
+
+
+        /* -------------------------------------------------
+           ICONO DEL MUNDO
+           ------------------------------------------------- */
+
+        let icono = "♪";
+
+
+        if (!desbloqueado) {
+
+            icono = "🔒";
+
+        }
+        else if (completado) {
+
+            icono = "✓";
+
+        }
+        else if (numeroMundo === 1) {
+
+            icono = "◉";
+
+        }
+        else if (numeroMundo === 2) {
+
+            icono = "♫";
+
+        }
+        else if (numeroMundo === 3) {
+
+            icono = "↗";
+
+        }
+
+
+        /* -------------------------------------------------
+           ESTADO DE LA CARD
+           ------------------------------------------------- */
+
+        let estado = "›";
+
+
+        if (!desbloqueado) {
+
+            estado = "🔒";
+
+        }
+        else if (completado) {
+
+            estado = "✓";
+
+        }
+
+
+        /* -------------------------------------------------
+           TEXTO DE ACCIÓN
+           ------------------------------------------------- */
+
+        let accion;
+
+
+        if (!desbloqueado) {
+
+            accion =
+                "Completá el mundo anterior";
+
+        }
+        else if (completado) {
+
+            accion =
+                "Mundo completado";
+
+        }
+        else {
+
+            accion =
+                "Continuar recorrido";
+
+        }
+
+
+        /* -------------------------------------------------
+           CONTENIDO HTML
+           ------------------------------------------------- */
+
+        card.innerHTML = `
+
+            <div class="world-top">
+
+                <div class="world-number">
+
+                    <div class="world-icon">
+
+                        ${icono}
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+
+                            ${mundo.titulo}
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="world-state
+                    ${completado
+                        ? "completed"
+                        : ""}">
+
+                    ${estado}
+
+                </div>
+
+            </div>
+
+
+            <p class="world-description">
+
+                ${mundo.descripcion}
+
+            </p>
+
+
+            <div class="world-footer">
+
+                <span class="world-action">
+
+                    ${accion}
+
+                </span>
+
+
+                <span class="world-arrow">
+
+                    →
+
+                </span>
+
+            </div>
+
+        `;
+
+
+        /* -------------------------------------------------
+           BLOQUEAR MUNDO
+           ------------------------------------------------- */
+
+        if (!desbloqueado) {
+
+            card.href = "#";
+
+
+            card.addEventListener(
+                "click",
+                event => {
+
+                    event.preventDefault();
+
+                }
+            );
+
+        }
+
+
+        /* -------------------------------------------------
+           AGREGAR A LA PÁGINA
+           ------------------------------------------------- */
+
+        lista.appendChild(card);
+
+    }
 );
 
 
+/* =========================================================
+   ENTRADA SUAVE DE LAS CARDS
+   ========================================================= */
 
+requestAnimationFrame(() => {
 
+    document
+        .querySelectorAll(
+            ".world-card"
+        )
+        .forEach(card => {
 
-Object.values(DB_MUNDOS).forEach((mundo,index)=>{
+            card.style.opacity = "1";
 
-
-const completado =
-mundosCompletados.includes(mundo.id);
-
-
-
-
-
-const numeroMundo =
-parseInt(mundo.id.replace("mundo",""));
-
-
-const desbloqueado =
-numeroMundo === 1 ||
-mundosCompletados.includes("mundo" + (numeroMundo - 1));
-
-
-
-
-const card =
-document.createElement("a");
-
-
-
-
-card.href =
-`mundo.html?id=${mundo.id}`;
-
-
-
-
-
-card.className = `
-
-
-block
-
-rounded-3xl
-
-p-6
-
-bg-slate-800/50
-
-border
-
-border-white/10
-
-transition
-
-
-${!desbloqueado ? "opacity-60 hover:bg-slate-700/50" : "hover:bg-slate-700/50"}
-
-`;
-
-
-
-
-
-
-card.innerHTML = `
-
-
-
-<div class="flex justify-between items-center">
-
-
-<h2 class="text-xl font-bold">
-
-${
-
-!desbloqueado
-
-?
-
-"🔒"
-
-:
-
-completado
-
-?
-
-"⭐"
-
-:
-
-"🌎"
-
-}
-
-
-${mundo.titulo}
-
-
-</h2>
-
-
-
-<span class="text-2xl">
-
-${
-
-!desbloqueado
-
-?
-
-"🔒"
-
-:
-
-completado
-
-?
-
-"✓"
-
-:
-
-"▶"
-
-}
-
-</span>
-
-
-</div>
-
-
-
-
-
-<p class="text-sm text-slate-400 mt-3">
-
-${mundo.descripcion}
-
-</p>
-
-
-
-
-
-
-<div class="mt-4 text-sm font-bold">
-
-
-${
-
-
-!desbloqueado
-
-?
-
-"Completa el mundo anterior para desbloquearlo"
-
-
-:
-
-
-completado
-
-?
-
-"⭐ Mundo completado"
-
-
-:
-
-
-"▶ Entrar al mundo"
-
-
-}
-
-
-</div>
-
-
-
-`;
-
-
-
-
-
-lista.appendChild(card);
-
-
+        });
 
 });
-
-
 
 
 </script>

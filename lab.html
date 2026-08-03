@@ -1,0 +1,2413 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>
+    Lab · Armonía Activa
+</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+
+<style>
+
+/* =========================================================
+   ARMONÍA ACTIVA — LABORATORIO
+   ESTILO GENERAL
+   ========================================================= */
+
+:root {
+
+    --lab-bg:
+        #050816;
+
+    --lab-panel:
+        rgba(15, 23, 42, 0.72);
+
+    --lab-border:
+        rgba(255,255,255,0.08);
+
+    --lab-accent:
+        #818cf8;
+
+    --lab-accent-light:
+        #c7d2fe;
+
+    --lab-text:
+        #f8fafc;
+
+    --lab-muted:
+        #94a3b8;
+
+}
+
+
+/* =========================================================
+   BASE
+   ========================================================= */
+
+* {
+
+    box-sizing:
+        border-box;
+
+}
+
+
+html {
+
+    min-height:
+        100%;
+
+}
+
+
+body {
+
+    margin:
+        0;
+
+    min-height:
+        100vh;
+
+    background:
+
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(99,102,241,0.18),
+            transparent 40%
+        ),
+
+        radial-gradient(
+            circle at 0% 50%,
+            rgba(139,92,246,0.08),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            180deg,
+            #080c19,
+            #050816 60%,
+            #020308
+        );
+
+    color:
+        var(--lab-text);
+
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    padding-bottom:
+        110px;
+
+}
+
+
+/* =========================================================
+   FONDO AMBIENTAL
+   ========================================================= */
+
+.ambient {
+
+    position:
+        fixed;
+
+    pointer-events:
+        none;
+
+    border-radius:
+        50%;
+
+    filter:
+        blur(80px);
+
+    opacity:
+        0.18;
+
+    z-index:
+        0;
+
+}
+
+
+.ambient-one {
+
+    width:
+        280px;
+
+    height:
+        280px;
+
+    top:
+        80px;
+
+    left:
+        -120px;
+
+    background:
+        #6366f1;
+
+}
+
+
+.ambient-two {
+
+    width:
+        240px;
+
+    height:
+        240px;
+
+    right:
+        -100px;
+
+    top:
+        45%;
+
+    background:
+        #8b5cf6;
+
+}
+
+
+/* =========================================================
+   CONTENEDOR
+   ========================================================= */
+
+.app {
+
+    position:
+        relative;
+
+    z-index:
+        1;
+
+    width:
+        100%;
+
+    max-width:
+        1000px;
+
+    margin:
+        0 auto;
+
+    padding:
+        40px 24px 30px;
+
+}
+
+
+/* =========================================================
+   ENTRADA
+   ========================================================= */
+
+.aparecer {
+
+    animation:
+        aparecer
+        500ms
+        ease-out;
+
+}
+
+
+@keyframes aparecer {
+
+    from {
+
+        opacity:
+            0;
+
+        transform:
+            translateY(12px);
+
+    }
+
+    to {
+
+        opacity:
+            1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.lab-header {
+
+    text-align:
+        center;
+
+    margin:
+        10px auto 34px;
+
+    max-width:
+        720px;
+
+}
+
+
+.lab-label {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    padding:
+        7px 12px;
+
+    margin-bottom:
+        16px;
+
+    border:
+        1px solid
+        rgba(129,140,248,0.16);
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(99,102,241,0.08);
+
+    color:
+        #a5b4fc;
+
+    font-size:
+        11px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.14em;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+.lab-dot {
+
+    width:
+        7px;
+
+    height:
+        7px;
+
+    border-radius:
+        50%;
+
+    background:
+        #818cf8;
+
+    box-shadow:
+        0 0 12px
+        rgba(129,140,248,0.8);
+
+}
+
+
+.lab-header h1 {
+
+    margin:
+        0;
+
+    font-size:
+        clamp(
+            2.2rem,
+            7vw,
+            4rem
+        );
+
+    line-height:
+        1.05;
+
+    letter-spacing:
+        -0.055em;
+
+    font-weight:
+        900;
+
+}
+
+
+.lab-header h1 span {
+
+    display:
+        block;
+
+    color:
+        #818cf8;
+
+}
+
+
+.lab-header p {
+
+    margin:
+        18px auto 0;
+
+    max-width:
+        600px;
+
+    color:
+        #94a3b8;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.7;
+
+}
+
+
+/* =========================================================
+   MÓDULOS
+   ========================================================= */
+
+.modulos {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    gap:
+        10px;
+
+    margin:
+        0 auto 34px;
+
+}
+
+
+.modulo {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        9px;
+
+    padding:
+        11px 18px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.06);
+
+    border-radius:
+        14px;
+
+    background:
+        rgba(15,23,42,0.5);
+
+    color:
+        #64748b;
+
+    cursor:
+        pointer;
+
+    transition:
+        all 180ms ease;
+
+}
+
+
+.modulo:hover {
+
+    color:
+        #c7d2fe;
+
+    background:
+        rgba(99,102,241,0.08);
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+.modulo.activo {
+
+    color:
+        #c7d2fe;
+
+    background:
+        rgba(99,102,241,0.14);
+
+    border-color:
+        rgba(129,140,248,0.18);
+
+    box-shadow:
+        0 0 20px
+        rgba(99,102,241,0.08);
+
+}
+
+
+.modulo-icono {
+
+    font-size:
+        17px;
+
+}
+
+
+.modulo-nombre {
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.12em;
+
+}
+
+
+/* =========================================================
+   PANEL
+   ========================================================= */
+
+.panel {
+
+    width:
+        100%;
+
+    max-width:
+        900px;
+
+    margin:
+        0 auto;
+
+}
+
+
+/* =========================================================
+   HEADER PANEL
+   ========================================================= */
+
+.panel-header {
+
+    text-align:
+        center;
+
+    margin-bottom:
+        24px;
+
+}
+
+
+.panel-header h2 {
+
+    margin:
+        0;
+
+    font-size:
+        clamp(
+            1.5rem,
+            5vw,
+            2rem
+        );
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        -0.04em;
+
+}
+
+
+.panel-header p {
+
+    margin:
+        10px auto 0;
+
+    max-width:
+        560px;
+
+    color:
+        var(--lab-muted);
+
+    font-size:
+        14px;
+
+    line-height:
+        1.6;
+
+}
+
+
+/* =========================================================
+   PIANO
+   ========================================================= */
+
+.piano-wrapper {
+
+    position:
+        relative;
+
+    width:
+        100%;
+
+    height:
+        250px;
+
+    padding:
+        12px;
+
+    border-radius:
+        26px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(30,41,59,0.9),
+            rgba(2,6,23,0.95)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,0.08);
+
+    box-shadow:
+
+        0 25px 70px
+        rgba(0,0,0,0.4),
+
+        inset 0 1px 0
+        rgba(255,255,255,0.04);
+
+}
+
+
+.piano {
+
+    position:
+        relative;
+
+    display:
+        flex;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    user-select:
+        none;
+
+    touch-action:
+        none;
+
+}
+
+
+/* =========================================================
+   TECLAS BLANCAS
+   ========================================================= */
+
+.tecla-blanca {
+
+    position:
+        relative;
+
+    flex:
+        1;
+
+    height:
+        100%;
+
+    display:
+        flex;
+
+    align-items:
+        flex-end;
+
+    justify-content:
+        center;
+
+    padding-bottom:
+        18px;
+
+    color:
+        #64748b;
+
+    font-size:
+        12px;
+
+    font-weight:
+        800;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #e2e8f0 75%,
+            #cbd5e1 100%
+        );
+
+    border:
+        1px solid
+        #94a3b8;
+
+    border-top:
+        none;
+
+    border-radius:
+        0 0 10px 10px;
+
+    box-shadow:
+
+        inset 0 -5px 8px
+        rgba(0,0,0,0.12),
+
+        0 4px 8px
+        rgba(0,0,0,0.3);
+
+    transition:
+
+        transform
+        80ms ease,
+
+        background
+        120ms ease,
+
+        box-shadow
+        120ms ease;
+
+}
+
+
+.tecla-negra {
+
+    position:
+        absolute;
+
+    z-index:
+        5;
+
+    top:
+        0;
+
+    left:
+        68%;
+
+    width:
+        64%;
+
+    height:
+        62%;
+
+    display:
+        flex;
+
+    align-items:
+        flex-end;
+
+    justify-content:
+        center;
+
+    padding-bottom:
+        12px;
+
+    color:
+        #64748b;
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            #334155,
+            #020617
+        );
+
+    border-radius:
+        0 0 8px 8px;
+
+    box-shadow:
+
+        inset 0 -3px 5px
+        rgba(255,255,255,0.08),
+
+        3px 6px 8px
+        rgba(0,0,0,0.5);
+
+    transition:
+
+        transform
+        80ms ease,
+
+        background
+        120ms ease,
+
+        box-shadow
+        120ms ease;
+
+}
+
+
+/* =========================================================
+   TECLAS ACTIVAS
+   ========================================================= */
+
+.tecla-blanca.activa {
+
+    transform:
+        translateY(3px);
+
+    background:
+
+        linear-gradient(
+            180deg,
+            color-mix(
+                in srgb,
+                var(--nota-color),
+                white 45%
+            ),
+            var(--nota-color)
+        );
+
+    color:
+        #1e1b4b;
+
+    box-shadow:
+
+        inset 0 -4px 8px
+        rgba(49,46,129,0.25),
+
+        0 0 30px
+        color-mix(
+            in srgb,
+            var(--nota-color),
+            transparent 55%
+        );
+
+}
+
+
+.tecla-negra.activa {
+
+    transform:
+        translateY(3px);
+
+    background:
+
+        linear-gradient(
+            180deg,
+            var(--nota-color),
+            #020617
+        );
+
+    color:
+        white;
+
+    box-shadow:
+
+        0 0 28px
+        color-mix(
+            in srgb,
+            var(--nota-color),
+            transparent 25%
+        );
+
+}
+
+
+/* =========================================================
+   NOTA ACTUAL
+   ========================================================= */
+
+.nota-actual {
+
+    margin:
+        22px auto 0;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    gap:
+        5px;
+
+}
+
+
+.nota-actual span {
+
+    font-size:
+        10px;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        0.22em;
+
+    color:
+        #64748b;
+
+}
+
+
+.nota-actual strong {
+
+    font-size:
+        clamp(
+            2rem,
+            8vw,
+            3rem
+        );
+
+    line-height:
+        1;
+
+    font-weight:
+        900;
+
+    color:
+        var(--nota-color, #a5b4fc);
+
+    text-shadow:
+        0 0 25px
+        color-mix(
+            in srgb,
+            var(--nota-color, #818cf8),
+            transparent 45%
+        );
+
+}
+
+
+.nota-actual small {
+
+    color:
+        #64748b;
+
+    font-size:
+        11px;
+
+    letter-spacing:
+        0.08em;
+
+}
+
+
+.nota-cambio {
+
+    animation:
+        notaCambio
+        260ms
+        ease-out;
+
+}
+
+
+@keyframes notaCambio {
+
+    0% {
+
+        opacity:
+            0.3;
+
+        transform:
+            scale(0.75);
+
+    }
+
+    60% {
+
+        opacity:
+            1;
+
+        transform:
+            scale(1.12);
+
+    }
+
+    100% {
+
+        transform:
+            scale(1);
+
+    }
+
+}
+
+/* =========================================================
+   INFORMACIÓN MUSICAL
+   ========================================================= */
+
+.informacion-musical {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        stretch;
+
+    gap:
+        70px;
+
+    margin:
+        24px auto 0;
+
+}
+
+
+/* =========================================================
+   NOTA ACTUAL
+   ========================================================= */
+
+.nota-actual {
+
+    margin:
+        0;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        6px;
+
+}
+
+
+.nota-actual span,
+.armonia-label {
+
+    font-size:
+        10px;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        0.22em;
+
+    color:
+        #64748b;
+
+}
+
+
+.nota-actual strong {
+
+    font-size:
+        clamp(
+            2rem,
+            8vw,
+            3rem
+        );
+
+    line-height:
+        1;
+
+    font-weight:
+        900;
+
+    background:
+
+        linear-gradient(
+            120deg,
+            #ffffff,
+            #a5b4fc,
+            #818cf8
+        );
+
+    -webkit-background-clip:
+        text;
+
+    background-clip:
+        text;
+
+    color:
+        transparent;
+
+}
+
+
+/* =========================================================
+   ACORDE ACTUAL
+   ========================================================= */
+
+.acorde-actual {
+
+    min-width:
+        190px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        7px;
+
+    padding:
+        12px 22px;
+
+    border:
+        1px solid
+        rgba(129,140,248,0.08);
+
+    border-radius:
+        18px;
+
+    background:
+        rgba(15,23,42,0.38);
+
+    transition:
+
+        border-color
+        180ms ease,
+
+        background
+        180ms ease,
+
+        box-shadow
+        180ms ease,
+
+        transform
+        180ms ease;
+
+}
+
+
+.acorde-actual strong {
+
+    min-height:
+        30px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    text-align:
+        center;
+
+    font-size:
+        17px;
+
+    font-weight:
+        800;
+
+    color:
+        #64748b;
+
+    transition:
+        color 180ms ease;
+
+}
+
+
+/* =========================================================
+   ACORDE DETECTADO
+   ========================================================= */
+
+.acorde-actual.detectado {
+
+    border-color:
+        rgba(129,140,248,0.30);
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(99,102,241,0.12),
+            rgba(15,23,42,0.45)
+        );
+
+    box-shadow:
+
+        0 0 25px
+        rgba(99,102,241,0.08);
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+.acorde-actual.detectado strong {
+
+    color:
+        #c7d2fe;
+
+}
+
+
+/* =========================================================
+   ANIMACIÓN DE DETECCIÓN
+   ========================================================= */
+
+.acorde-actual.detectado strong {
+
+    animation:
+        acordeDetectado
+        280ms
+        ease-out;
+
+}
+
+
+@keyframes acordeDetectado {
+
+    0% {
+
+        opacity:
+            0;
+
+        transform:
+            translateY(5px)
+            scale(0.96);
+
+    }
+
+    100% {
+
+        opacity:
+            1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (
+    max-width: 640px
+) {
+
+    .informacion-musical {
+
+        gap:
+            18px;
+
+    }
+
+
+    .acorde-actual {
+
+        min-width:
+            145px;
+
+        padding:
+            10px 14px;
+
+    }
+
+
+    .acorde-actual strong {
+
+        font-size:
+            14px;
+
+    }
+
+}
+
+
+/* =========================================================
+   VISUALIZADOR
+   ========================================================= */
+
+.visualizador {
+
+    --nota-color:
+        #818cf8;
+
+    position:
+        relative;
+
+    width:
+        100%;
+
+    height:
+        300px;
+
+    margin:
+        28px auto;
+
+    overflow:
+        hidden;
+
+    border-radius:
+        30px;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 50%,
+            color-mix(
+                in srgb,
+                var(--nota-color),
+                transparent 88%
+            ),
+            transparent 55%
+        ),
+
+        linear-gradient(
+            180deg,
+            rgba(15,23,42,0.94),
+            rgba(2,6,23,0.99)
+        );
+
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--nota-color),
+            transparent 75%
+        );
+
+    box-shadow:
+
+        inset 0 0 70px
+        rgba(0,0,0,0.45),
+
+        0 20px 55px
+        rgba(0,0,0,0.3);
+
+    transition:
+
+        border-color
+        400ms ease,
+
+        box-shadow
+        400ms ease,
+
+        background
+        400ms ease;
+
+}
+
+
+/* =========================================================
+   GRID
+   ========================================================= */
+
+.visualizador-grid {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    pointer-events:
+        none;
+
+    background-image:
+
+        linear-gradient(
+            rgba(255,255,255,0.025)
+            1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.025)
+            1px,
+            transparent 1px
+        );
+
+    background-size:
+        35px 35px;
+
+    opacity:
+        0.35;
+
+}
+
+
+/* =========================================================
+   LÍNEAS DE ALTURA
+   ========================================================= */
+
+.visualizador::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        32px 0;
+
+    pointer-events:
+        none;
+
+    background:
+
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent calc(12.5% - 1px),
+            rgba(255,255,255,0.055)
+                calc(12.5% - 1px),
+            rgba(255,255,255,0.055)
+                12.5%
+        );
+
+    opacity:
+        0.45;
+
+}
+
+
+/* =========================================================
+   CANVAS
+   ========================================================= */
+
+.onda-canvas {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    display:
+        block;
+
+    z-index:
+        3;
+
+    pointer-events:
+        none;
+
+}
+
+
+/* =========================================================
+   ESCALA VERTICAL
+   ========================================================= */
+
+.escala-altura {
+
+    position:
+        absolute;
+
+    top:
+        32px;
+
+    bottom:
+        32px;
+
+    left:
+        12px;
+
+    width:
+        30px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    justify-content:
+        space-between;
+
+    z-index:
+        4;
+
+    pointer-events:
+        none;
+
+}
+
+
+.escala-altura span {
+
+    font-size:
+        8px;
+
+    font-weight:
+        700;
+
+    color:
+        rgba(148,163,184,0.45);
+
+    letter-spacing:
+        0.04em;
+
+}
+
+
+/* =========================================================
+   NÚCLEO
+   ========================================================= */
+
+.visualizador-nucleo {
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    top:
+        50%;
+
+    width:
+        100px;
+
+    height:
+        100px;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.72);
+
+    border-radius:
+        50%;
+
+    background:
+
+        radial-gradient(
+            circle,
+            color-mix(
+                in srgb,
+                var(--nota-color),
+                white 50%
+            ),
+            color-mix(
+                in srgb,
+                var(--nota-color),
+                transparent 80%
+            ) 40%,
+            transparent 75%
+        );
+
+    box-shadow:
+
+        0 0 30px
+        color-mix(
+            in srgb,
+            var(--nota-color),
+            transparent 55%
+        ),
+
+        0 0 90px
+        color-mix(
+            in srgb,
+            var(--nota-color),
+            transparent 75%
+        );
+
+    opacity:
+        0.12;
+
+    transition:
+
+        transform
+        120ms ease,
+
+        opacity
+        180ms ease,
+
+        background
+        400ms ease;
+
+    z-index:
+        1;
+
+    pointer-events:
+        none;
+
+}
+
+
+.nucleo-brillo {
+
+    position:
+        absolute;
+
+    inset:
+        20%;
+
+    border-radius:
+        50%;
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.65),
+            transparent 75%
+        );
+
+    filter:
+        blur(4px);
+
+}
+
+
+/* =========================================================
+   ESTADO ACTIVO
+   ========================================================= */
+
+.visualizador.activo {
+
+    border-color:
+
+        color-mix(
+            in srgb,
+            var(--nota-color),
+            transparent 50%
+        );
+
+    box-shadow:
+
+        inset 0 0 90px
+        color-mix(
+            in srgb,
+            var(--nota-color),
+            transparent 92%
+        ),
+
+        0 0 55px
+        color-mix(
+            in srgb,
+            var(--nota-color),
+            transparent 90%
+        );
+
+}
+
+
+/* =========================================================
+   INDICADOR CENTRAL
+   ========================================================= */
+
+.visualizador-centro {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    z-index:
+        5;
+
+    pointer-events:
+        none;
+
+}
+
+
+.visualizador-valor {
+
+    padding:
+        7px 13px;
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(2,6,23,0.68);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.08);
+
+    backdrop-filter:
+        blur(10px);
+
+    color:
+        #a5b4fc;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.15em;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+/* =========================================================
+   INFORMACIÓN DEL ACORDE
+   ========================================================= */
+
+.acorde-actual {
+
+    margin:
+        12px auto 20px;
+
+    text-align:
+        center;
+
+}
+
+
+.acorde-label {
+
+    display:
+        block;
+
+    margin-bottom:
+        9px;
+
+    color:
+        #475569;
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.18em;
+
+}
+
+
+.acorde-notas {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        7px;
+
+    min-height:
+        28px;
+
+}
+
+
+.nota-chip {
+
+    padding:
+        6px 10px;
+
+    border-radius:
+        999px;
+
+    color:
+        var(--nota-color);
+
+    background:
+        color-mix(
+            in srgb,
+            var(--nota-color),
+            transparent 88%
+        );
+
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--nota-color),
+            transparent 70%
+        );
+
+    box-shadow:
+        0 0 18px
+        color-mix(
+            in srgb,
+            var(--nota-color),
+            transparent 88%
+        );
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+}
+
+
+/* =========================================================
+   MENSAJE
+   ========================================================= */
+
+.mensaje-lab {
+
+    margin:
+        20px auto;
+
+    max-width:
+        600px;
+
+    padding:
+        16px 20px;
+
+    text-align:
+        center;
+
+    color:
+        #64748b;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.6;
+
+    border-radius:
+        16px;
+
+    background:
+        rgba(15,23,42,0.45);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.05);
+
+}
+
+
+.mensaje-lab strong {
+
+    color:
+        #a5b4fc;
+
+}
+
+
+/* =========================================================
+   EXPERIMENTOS
+   ========================================================= */
+
+.experimento {
+
+    margin-bottom:
+        14px;
+
+    padding:
+        22px;
+
+    border-radius:
+        22px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(30,41,59,0.65),
+            rgba(15,23,42,0.5)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,0.07);
+
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease;
+
+}
+
+
+.experimento:hover {
+
+    transform:
+        translateY(-2px);
+
+    border-color:
+        rgba(129,140,248,0.2);
+
+}
+
+
+.experimento h3 {
+
+    margin:
+        0 0 8px;
+
+    font-size:
+        15px;
+
+    color:
+        #c7d2fe;
+
+}
+
+
+.experimento p {
+
+    margin:
+        0;
+
+    color:
+        #94a3b8;
+
+    font-size:
+        13px;
+
+    line-height:
+        1.6;
+
+}
+
+
+/* =========================================================
+   NAVEGACIÓN
+   ========================================================= */
+
+.bottom-nav {
+
+    position:
+        fixed;
+
+    z-index:
+        20;
+
+    left:
+        50%;
+
+    bottom:
+        18px;
+
+    transform:
+        translateX(-50%);
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        8px;
+
+    width:
+        min(
+            calc(100% - 28px),
+            430px
+        );
+
+    padding:
+        8px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.08);
+
+    border-radius:
+        20px;
+
+    background:
+        rgba(5,8,22,0.82);
+
+    backdrop-filter:
+        blur(20px);
+
+    box-shadow:
+        0 15px 45px
+        rgba(0,0,0,0.45);
+
+}
+
+
+.nav-item {
+
+    flex:
+        1;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        3px;
+
+    min-height:
+        48px;
+
+    border-radius:
+        14px;
+
+    color:
+        #64748b;
+
+    text-decoration:
+        none;
+
+    font-size:
+        10px;
+
+    font-weight:
+        700;
+
+    transition:
+        all 180ms ease;
+
+}
+
+
+.nav-item:hover {
+
+    color:
+        #c7d2fe;
+
+    background:
+        rgba(99,102,241,0.08);
+
+}
+
+
+.nav-item.active {
+
+    color:
+        #c7d2fe;
+
+    background:
+        rgba(99,102,241,0.14);
+
+}
+
+
+.nav-icon {
+
+    font-size:
+        17px;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (
+    max-width: 640px
+) {
+
+    .app {
+
+        padding:
+            28px 14px 30px;
+
+    }
+
+
+    .lab-header {
+
+        margin-top:
+            5px;
+
+        margin-bottom:
+            25px;
+
+    }
+
+
+    .lab-header h1 {
+
+        font-size:
+            2.25rem;
+
+    }
+
+
+    .modulos {
+
+        gap:
+            6px;
+
+        margin-bottom:
+            26px;
+
+    }
+
+
+    .modulo {
+
+        flex:
+            1;
+
+        justify-content:
+            center;
+
+        padding:
+            10px 8px;
+
+    }
+
+
+    .modulo-icono {
+
+        font-size:
+            15px;
+
+    }
+
+
+    .modulo-nombre {
+
+        font-size:
+            9px;
+
+    }
+
+
+    .piano-wrapper {
+
+        height:
+            190px;
+
+        padding:
+            8px;
+
+        border-radius:
+            20px;
+
+    }
+
+
+    .visualizador {
+
+        height:
+            240px;
+
+        border-radius:
+            24px;
+
+    }
+
+
+    .escala-altura {
+
+        left:
+            8px;
+
+    }
+
+
+    .nota-actual strong {
+
+        font-size:
+            2.4rem;
+
+    }
+
+}
+
+
+/* =========================================================
+   REDUCIR MOVIMIENTO
+   ========================================================= */
+
+@media (
+    prefers-reduced-motion: reduce
+) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            0.01ms !important;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="ambient ambient-one"></div>
+
+<div class="ambient ambient-two"></div>
+
+
+<div class="app">
+
+
+<header class="lab-header">
+
+
+<div class="lab-label">
+
+<span class="lab-dot"></span>
+
+Laboratorio
+
+</div>
+
+
+<h1>
+
+Explorá la música.
+
+<span>Sin instrucciones.</span>
+
+</h1>
+
+
+<p>
+
+Un espacio para tocar, escuchar y experimentar
+con las mismas ideas que aprendés en tu recorrido.
+
+</p>
+
+
+</header>
+
+
+<section class="modulos">
+
+
+<button
+    class="modulo activo"
+    data-modulo="piano">
+
+<span class="modulo-icono">
+    🎹
+</span>
+
+<span class="modulo-nombre">
+    PIANO
+</span>
+
+</button>
+
+
+<button
+    class="modulo"
+    data-modulo="sonido">
+
+<span class="modulo-icono">
+    ◉
+</span>
+
+<span class="modulo-nombre">
+    SONIDO
+</span>
+
+</button>
+
+
+<button
+    class="modulo"
+    data-modulo="experimentos">
+
+<span class="modulo-icono">
+    ✦
+</span>
+
+<span class="modulo-nombre">
+    EXPERIMENTOS
+</span>
+
+</button>
+
+
+</section>
+
+
+<main
+    id="labPanel"
+    class="panel">
+
+</main>
+
+
+</div>
+
+
+<nav class="bottom-nav">
+
+
+<a
+    href="index.html"
+    class="nav-item">
+
+<span class="nav-icon">
+    🗺️
+</span>
+
+<span>
+    Ruta
+</span>
+
+</a>
+
+
+<a
+    href="lab.html"
+    class="nav-item active">
+
+<span class="nav-icon">
+    🎹
+</span>
+
+<span>
+    Lab
+</span>
+
+</a>
+
+
+<a
+    href="perfil.html"
+    class="nav-item">
+
+<span class="nav-icon">
+    👤
+</span>
+
+<span>
+    Perfil
+</span>
+
+</a>
+
+
+</nav>
+
+
+<script src="js/audio.js"></script>
+
+<script src="js/lab.js"></script>
+
+
+</body>
+
+</html>
+
