@@ -841,7 +841,9 @@ body {
 
     width: 100%;
 
-    padding: 30px 12px 20px;
+    overflow-x: auto;
+
+    padding: 30px 20px 20px;
 
 }
 
@@ -854,21 +856,11 @@ body {
 
     justify-content: center;
 
-    width: 100%;
-
-    max-width: 600px;
+    min-width: 700px;
 
     height: 240px;
 
     margin: 0 auto;
-
-    gap: 3px;
-
-    /* Evita que el navegador use este gesto para hacer
-       scroll de la página mientras se toca una tecla:
-       clave para que no se "pierdan" pointerup/pointercancel
-       en mobile. */
-    touch-action: none;
 
 }
 
@@ -881,14 +873,9 @@ body {
 
     position: relative;
 
-    /* Las 8 teclas blancas se reparten el ancho disponible
-       en partes iguales, así siempre entran todas en
-       pantalla, sea cual sea el tamaño del celular. */
-    flex: 1 1 0;
+    width: 72px;
 
-    min-width: 0;
-
-    height: 100%;
+    height: 230px;
 
     background: linear-gradient(
         to bottom,
@@ -918,8 +905,6 @@ body {
     color: #111827;
 
     user-select: none;
-
-    touch-action: none;
 
     transition:
         transform .05s ease,
@@ -981,15 +966,11 @@ body {
 
     top: 0;
 
-    /* Porcentajes en vez de píxeles fijos: la tecla negra
-       se resuelve contra el tamaño de la blanca (que es
-       flexible), así que escala junto con ella en
-       cualquier ancho de pantalla. */
-    right: -29%;
+    right: -20px;
 
-    width: 58%;
+    width: 42px;
 
-    height: 62%;
+    height: 145px;
 
     background: linear-gradient(
         to bottom,
@@ -1017,8 +998,6 @@ body {
     cursor: pointer;
 
     user-select: none;
-
-    touch-action: none;
 
 }
 
@@ -1262,53 +1241,9 @@ body {
     }
 
 
-    .piano-wrapper {
-
-        padding: 24px 8px 16px;
-
-    }
-
-
     .piano {
 
-        height: 175px;
-
-    }
-
-
-    .tecla-blanca {
-
-        padding-bottom: 8px;
-
-    }
-
-
-    .tecla-nombre {
-
-        font-size: 11px;
-
-    }
-
-
-    .tecla-computadora {
-
-        /* En mobile no hay teclado físico: esa letra
-           de referencia solo ocupa espacio y confunde. */
-        display: none;
-
-    }
-
-
-    .tecla-negra span {
-
-        font-size: 8px;
-
-    }
-
-
-    .tecla-negra small {
-
-        display: none;
+        justify-content: flex-start;
 
     }
 

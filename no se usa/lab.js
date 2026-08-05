@@ -43,90 +43,6 @@ const estadoLab = {
 
 
 // ============================================================
-// LIMPIAR HERRAMIENTA ANTERIOR
-// ============================================================
-//
-// Cada herramienta puede registrar panel._limpiarHerramienta
-// (una función) para liberar audio, timers, animaciones, etc.
-// antes de que el Laboratorio la reemplace por otra.
-//
-// Sin esto, por ejemplo, el metrónomo podía quedar sonando
-// en segundo plano para siempre después de salir de él,
-// y volver a abrirlo apilaba un segundo intervalo encima
-// del primero (sonando fuera de sincro).
-//
-// ============================================================
-
-function limpiarHerramientaActual() {
-
-    if (
-        !panel
-    ) {
-
-        return;
-
-    }
-
-
-    if (
-        typeof panel._limpiarHerramienta ===
-        "function"
-    ) {
-
-        try {
-
-            panel._limpiarHerramienta();
-
-        }
-
-        catch (error) {
-
-            console.error(
-                "Error al limpiar la herramienta anterior:",
-                error
-            );
-
-        }
-
-    }
-
-
-    panel._limpiarHerramienta =
-        null;
-
-}
-
-
-
-// ============================================================
-// MARCAR TARJETA ACTIVA EN EL CATÁLOGO
-// ============================================================
-
-function marcarTarjetaActiva(
-    id
-) {
-
-    document
-        .querySelectorAll(
-            "[data-herramienta]"
-        )
-        .forEach(
-            boton => {
-
-                boton.classList.toggle(
-                    "activa",
-                    boton.dataset.herramienta ===
-                    id
-                );
-
-            }
-        );
-
-}
-
-
-
-// ============================================================
 // HERRAMIENTAS
 // ============================================================
 //
@@ -201,9 +117,6 @@ function renderHerramientas() {
     }
 
 
-    limpiarHerramientaActual();
-
-
     estadoLab.modulo =
         "herramientas";
 
@@ -216,32 +129,99 @@ function renderHerramientas() {
     );
 
 
-    marcarTarjetaActiva(
-        null
-    );
-
-
-    // El catálogo de herramientas ya está arriba, en el
-    // HTML estático (#herramientasGrid). Antes este panel
-    // volvía a dibujar una segunda copia idéntica acá abajo;
-    // ahora simplemente mostramos una guía corta.
-
     panel.innerHTML = `
 
         <div class="panel-header">
 
             <h2>
-                Elegí una herramienta
+                Herramientas
             </h2>
 
             <p>
-                Tocá cualquiera de las tarjetas de arriba
-                para empezar a practicar.
+                Una caja de herramientas para practicar,
+                experimentar y analizar música.
             </p>
 
         </div>
 
+
+        <div
+            class="herramientas-grid"
+            id="herramientasGrid">
+
+        </div>
+
     `;
+
+
+    const grid =
+        document.getElementById(
+            "herramientasGrid"
+        );
+
+
+    if (!grid) {
+
+        return;
+
+    }
+
+
+    Object.entries(
+        herramientasDisponibles
+    ).forEach(
+        (
+            [id, herramienta]
+        ) => {
+
+            const boton =
+                document.createElement(
+                    "button"
+                );
+
+
+            boton.type =
+                "button";
+
+
+            boton.className =
+                "herramienta-card";
+
+
+            boton.dataset.herramienta =
+                id;
+
+
+            boton.innerHTML = `
+
+                <span class="herramienta-icono">
+
+                    ${herramienta.icono}
+
+                </span>
+
+
+                <span class="herramienta-contenido">
+
+                    <strong>
+                        ${herramienta.nombre}
+                    </strong>
+
+                    <small>
+                        ${herramienta.descripcion}
+                    </small>
+
+                </span>
+
+            `;
+
+
+            grid.appendChild(
+                boton
+            );
+
+        }
+    );
 
 }
 
@@ -271,21 +251,6 @@ function abrirHerramienta(
     }
 
 
-    // Si ya estábamos en esta misma herramienta,
-    // no hace falta reconstruir nada.
-
-    if (
-        estadoLab.herramientaActual === id
-    ) {
-
-        return;
-
-    }
-
-
-    limpiarHerramientaActual();
-
-
     estadoLab.modulo =
         "herramientas";
 
@@ -296,11 +261,6 @@ function abrirHerramienta(
 
     actualizarBotonModulo(
         "herramientas"
-    );
-
-
-    marcarTarjetaActiva(
-        id
     );
 
 
@@ -540,18 +500,6 @@ function renderSonido() {
     }
 
 
-    limpiarHerramientaActual();
-
-
-    estadoLab.herramientaActual =
-        null;
-
-
-    marcarTarjetaActiva(
-        null
-    );
-
-
     panel.innerHTML = `
 
         <div class="panel-header">
@@ -615,18 +563,6 @@ function renderExperimentos() {
         return;
 
     }
-
-
-    limpiarHerramientaActual();
-
-
-    estadoLab.herramientaActual =
-        null;
-
-
-    marcarTarjetaActiva(
-        null
-    );
 
 
     panel.innerHTML = `
@@ -710,16 +646,6 @@ if (panel) {
     renderHerramientas();
 
 }
-
-
-// Si el usuario se va del Lab (por ejemplo tocando
-// "Ruta" o "Perfil" en la navegación inferior), nos
-// aseguramos de soltar audio y timers antes de irnos.
-
-window.addEventListener(
-    "pagehide",
-    limpiarHerramientaActual
-);
 
 
 console.log(

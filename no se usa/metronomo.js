@@ -1491,7 +1491,7 @@ HERRAMIENTAS.metronomo = function(contenedor) {
     // LIMPIEZA
     // ========================================================
 
-    contenedor._limpiarHerramienta =
+    contenedor._limpiarMetronomo =
         function() {
 
             reproduciendo =
@@ -1499,10 +1499,6 @@ HERRAMIENTAS.metronomo = function(contenedor) {
 
 
             detenerIntervalo();
-
-
-            botonPlay.innerText =
-                "▶ Iniciar";
 
         };
 

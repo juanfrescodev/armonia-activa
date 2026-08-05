@@ -542,40 +542,6 @@ function renderPiano(
 
     iniciarVisualizacionPiano();
 
-
-    // ========================================================
-    // LIMPIEZA
-    // ========================================================
-    //
-    // El Laboratorio llama a esto antes de mostrar otra
-    // herramienta. Sin esto, si te vas con una nota
-    // presionada (o el finger drag falló), la nota queda
-    // sonando en segundo plano para siempre.
-    //
-    // ========================================================
-
-    panel._limpiarHerramienta =
-        function() {
-
-            soltarTodasLasNotasPiano();
-
-
-            if (
-                animacionPiano
-            ) {
-
-                cancelAnimationFrame(
-                    animacionPiano
-                );
-
-
-                animacionPiano =
-                    null;
-
-            }
-
-        };
-
 }
 
 
@@ -660,26 +626,6 @@ function construirPiano() {
 
                     event.preventDefault();
 
-
-                    // Capturamos el puntero: así, aunque el dedo
-                    // se deslice fuera de la tecla, el pointerup
-                    // sigue llegando a ESTA tecla y no se pierde.
-
-                    if (
-                        tecla.setPointerCapture
-                    ) {
-
-                        try {
-
-                            tecla.setPointerCapture(
-                                event.pointerId
-                            );
-
-                        } catch (error) {}
-
-                    }
-
-
                     tocarNotaPiano(
                         nota.id
                     );
@@ -693,22 +639,6 @@ function construirPiano() {
                 event => {
 
                     event.preventDefault();
-
-                    soltarNotaPiano(
-                        nota.id
-                    );
-
-                }
-            );
-
-
-            // pointercancel: el navegador cancela el gesto
-            // (scroll, gesto del sistema, multitouch, etc).
-            // Sin esto, la nota queda sonando para siempre.
-
-            tecla.addEventListener(
-                "pointercancel",
-                () => {
 
                     soltarNotaPiano(
                         nota.id
@@ -785,22 +715,6 @@ function construirPiano() {
 
                         event.stopPropagation();
 
-
-                        if (
-                            negra.setPointerCapture
-                        ) {
-
-                            try {
-
-                                negra.setPointerCapture(
-                                    event.pointerId
-                                );
-
-                            } catch (error) {}
-
-                        }
-
-
                         tocarNotaPiano(
                             siguiente.id
                         );
@@ -814,20 +728,6 @@ function construirPiano() {
                     event => {
 
                         event.preventDefault();
-
-                        event.stopPropagation();
-
-                        soltarNotaPiano(
-                            siguiente.id
-                        );
-
-                    }
-                );
-
-
-                negra.addEventListener(
-                    "pointercancel",
-                    event => {
 
                         event.stopPropagation();
 
@@ -890,27 +790,19 @@ async function tocarNotaPiano(
     }
 
 
-    // Marcamos la tecla como presionada y la
-    // pintamos YA MISMO, sin esperar al audio.
-    // Así la interfaz responde al instante en mobile,
-    // aunque el sonido tarde unos milisegundos más.
-
     estadoPiano.teclasPresionadas.add(
         notaID
     );
 
 
-    activarTeclaPiano(
-        notaID
-    );
-
-
-    actualizarInterfazPiano();
-
-
     try {
 
         await iniciarAudioPiano();
+
+
+        estadoPiano.synth.triggerAttack(
+            notaID
+        );
 
     }
 
@@ -927,50 +819,17 @@ async function tocarNotaPiano(
         );
 
 
-        apagarTeclaPiano(
-            notaID
-        );
-
-
-        actualizarInterfazPiano();
-
-
         return;
 
     }
 
 
-    // --------------------------------------------
-    // PUNTO CRÍTICO (mobile):
-    //
-    // Mientras esperábamos a que el audio esté listo,
-    // pudo haber pasado que el usuario ya soltó la
-    // tecla (toque rápido). Si no controlamos esto acá,
-    // el ataque se dispara igual y la nota queda sonando
-    // para siempre, porque el "soltar" ya pasó y no
-    // encontró el synth creado.
-    // --------------------------------------------
-
-    const seguiaPresionada =
-        estadoPiano.teclasPresionadas.has(
-            notaID
-        );
-
-
-    estadoPiano.synth.triggerAttack(
+    activarTeclaPiano(
         notaID
     );
 
 
-    if (
-        !seguiaPresionada
-    ) {
-
-        estadoPiano.synth.triggerRelease(
-            notaID
-        );
-
-    }
+    actualizarInterfazPiano();
 
 }
 
@@ -1000,22 +859,8 @@ function soltarNotaPiano(
     );
 
 
-    apagarTeclaPiano(
-        notaID
-    );
-
-
-    actualizarInterfazPiano();
-
-
-    // Si el synth ya existe, soltamos el sonido ahora.
-    // Si todavía se está inicializando, no hacemos nada:
-    // tocarNotaPiano() se encarga de soltarla apenas
-    // termine de atacarla (ver "seguiaPresionada" arriba).
-
     if (
-        estadoPiano.synth &&
-        estadoPiano.audioIniciado
+        estadoPiano.synth
     ) {
 
         estadoPiano.synth.triggerRelease(
@@ -1024,76 +869,15 @@ function soltarNotaPiano(
 
     }
 
-}
 
-
-
-// ============================================================
-// SOLTAR TODAS LAS NOTAS (red de seguridad)
-// ============================================================
-//
-// Se usa al salir de la herramienta, al perder el foco
-// de la pestaña, o al navegar a otra sección: evita que
-// alguna nota quede sonando sola por un evento táctil
-// que el navegador nunca terminó de disparar
-// (típico en mobile: pointercancel, cambio de pestaña,
-// gesto de scroll interrumpido, etc).
-//
-// ============================================================
-
-function soltarTodasLasNotasPiano() {
-
-    Array.from(
-        estadoPiano.teclasPresionadas
-    ).forEach(
-        notaID => {
-
-            soltarNotaPiano(
-                notaID
-            );
-
-        }
+    apagarTeclaPiano(
+        notaID
     );
 
 
-    if (
-        estadoPiano.synth
-    ) {
-
-        estadoPiano.synth.releaseAll();
-
-    }
+    actualizarInterfazPiano();
 
 }
-
-
-
-document.addEventListener(
-    "visibilitychange",
-    () => {
-
-        if (
-            document.hidden
-        ) {
-
-            soltarTodasLasNotasPiano();
-
-        }
-
-    }
-);
-
-
-window.addEventListener(
-    "pagehide",
-    soltarTodasLasNotasPiano
-);
-
-
-window.addEventListener(
-    "blur",
-    soltarTodasLasNotasPiano
-);
 
 
 
