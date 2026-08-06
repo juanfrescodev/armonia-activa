@@ -504,6 +504,80 @@ body {
 }
 
 
+.herramienta-card:disabled {
+
+    cursor:
+        default;
+
+    opacity:
+        0.45;
+
+    filter:
+        saturate(0.4);
+
+}
+
+
+.herramienta-card:disabled:hover {
+
+    transform:
+        none;
+
+    border-color:
+        rgba(255,255,255,0.07);
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(30,41,59,0.68),
+            rgba(15,23,42,0.48)
+        );
+
+}
+
+
+.herramienta-card-badge {
+
+    position:
+        absolute;
+
+    top:
+        12px;
+
+    right:
+        12px;
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.05em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        var(--lab-muted);
+
+    background:
+        rgba(148,163,184,0.12);
+
+    border:
+        1px solid rgba(148,163,184,0.2);
+
+    padding:
+        3px 8px;
+
+    border-radius:
+        999px;
+
+}
+
+
 .herramienta-icono {
 
     font-size:
@@ -1563,7 +1637,7 @@ escuchar, experimentar y entender la música.
     </span>
 
     <span class="herramienta-descripcion">
-        Explorá notas, alturas y sonidos.
+        Tocá con el mouse, el dedo o tu teclado y mirá qué acorde estás formando.
     </span>
 
 </button>
@@ -1584,28 +1658,7 @@ escuchar, experimentar y entender la música.
     </span>
 
     <span class="herramienta-descripcion">
-        Practicá con un pulso preciso.
-    </span>
-
-</button>
-
-
-
-<button
-    class="herramienta-card"
-    data-herramienta="afinador"
->
-
-    <span class="herramienta-icono">
-        🎧
-    </span>
-
-    <span class="herramienta-nombre">
-        Afinador
-    </span>
-
-    <span class="herramienta-descripcion">
-        Próximamente.
+        Un pulso preciso al milisegundo, hasta en compases compuestos e irregulares.
     </span>
 
 </button>
@@ -1622,11 +1675,32 @@ escuchar, experimentar y entender la música.
     </span>
 
     <span class="herramienta-nombre">
-        Acordes
+        Constructor de Acordes
     </span>
 
     <span class="herramienta-descripcion">
-        Construí y escuchá acordes.
+        Armá acordes nota por nota y descubrí qué estructura armónica forman.
+    </span>
+
+</button>
+
+
+
+<button
+    class="herramienta-card"
+    data-herramienta="diccionario"
+>
+
+    <span class="herramienta-icono">
+        📖
+    </span>
+
+    <span class="herramienta-nombre">
+        Diccionario de Acordes
+    </span>
+
+    <span class="herramienta-descripcion">
+        Buscá cualquier acorde y mirá sus notas en el piano y en la guitarra.
     </span>
 
 </button>
@@ -1643,11 +1717,37 @@ escuchar, experimentar y entender la música.
     </span>
 
     <span class="herramienta-nombre">
-        Intervalos
+        Entrenador de Intervalos
     </span>
 
     <span class="herramienta-descripcion">
-        Explorá distancias entre notas.
+        Entrená tu oído reconociendo distancias entre notas.
+    </span>
+
+</button>
+
+
+
+<button
+    class="herramienta-card"
+    data-herramienta="afinador"
+   
+>
+
+    <span class="herramienta-card-badge">
+        Afiná tu instrumento
+    </span>
+
+    <span class="herramienta-icono">
+        🎧
+    </span>
+
+    <span class="herramienta-nombre">
+        Afinador
+    </span>
+
+    <span class="herramienta-descripcion">
+        Afiná tu instrumento en tiempo real con el micrófono.
     </span>
 
 </button>
@@ -1657,7 +1757,12 @@ escuchar, experimentar y entender la música.
 <button
     class="herramienta-card"
     data-herramienta="escalas"
+    disabled
 >
+
+    <span class="herramienta-card-badge">
+        Próximamente
+    </span>
 
     <span class="herramienta-icono">
         🎵
@@ -1668,7 +1773,7 @@ escuchar, experimentar y entender la música.
     </span>
 
     <span class="herramienta-descripcion">
-        Próximamente.
+        Explorá escalas y modos, y escuchá cómo suena cada uno.
     </span>
 
 </button>
@@ -1768,6 +1873,14 @@ escuchar, experimentar y entender la música.
 <script src="js/herramientas/metronomo.js"></script>
 
 <script src="js/herramientas/piano.js"></script>
+
+<script src="js/herramientas/intervalos.js"></script>
+
+<script src="js/herramientas/acordes.js"></script>
+
+<script src="js/herramientas/diccionario-acordes.js"></script>
+
+<script src="js/herramientas/afinador.js"></script>
 
 <script src="js/lab.js"></script>
 

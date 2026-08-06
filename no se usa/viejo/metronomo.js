@@ -24,21 +24,7 @@ HERRAMIENTAS.metronomo = function(contenedor) {
     let pasoActual = 0;
     let timerID = null;
     const lookahead = 25.0; // Frecuencia de revisión en ms
-
-    // En mobile los navegadores pueden "pausar" brevemente el hilo
-    // principal (scroll, animaciones, GC). Con solo 0.1s de colchón
-    // eso alcanza a vaciar la cola de notas programadas y el pulso
-    // se siente inestable. 0.25s da mucho más margen sin agregar
-    // latencia perceptible al oído.
-    const scheduleAheadTime = 0.25; // Qué tan adelante programar en segundos
-
-    // Cola de próximos beats ya programados en audio pero todavía
-    // no "dibujados". Un único loop de requestAnimationFrame los va
-    // mostrando en el momento justo, en lugar de crear un setTimeout
-    // por cada beat (eso generaba jank y updates poco fluidos en
-    // celulares de gama media/baja).
-    let colaVisual = [];
-    let rafID = null;
+    const scheduleAheadTime = 0.1; // Qué tan adelante programar en segundos
 
     // ========================================================
     // DEFINICIÓN DE COMPASES
@@ -128,7 +114,7 @@ HERRAMIENTAS.metronomo = function(contenedor) {
         <div class="text-center mb-8">
             <div class="text-4xl mb-4">⏱️</div>
             <h2 class="text-3xl font-black">Metrónomo</h2>
-            <p class="text-slate-400 mt-3">Un pulso preciso al milisegundo, incluso en compases complejos. Ideal para afianzar el tempo y sentir la subdivisión con el cuerpo.</p>
+            <p class="text-slate-400 mt-3">Precisión profesional de alta fidelidad para compases complejos.</p>
         </div>
 
         <div class="bg-slate-900/70 border border-white/10 rounded-3xl p-6 md:p-8">
@@ -251,38 +237,6 @@ HERRAMIENTAS.metronomo = function(contenedor) {
         }
     }
 
-    // ========================================================
-    // MANEJO DE SEGUNDO PLANO (clave para estabilidad en mobile)
-    // ========================================================
-    //
-    // En celulares, cuando la pantalla se apaga o se cambia de app,
-    // el sistema puede suspender el AudioContext y frenar el hilo
-    // principal. Al volver, si no hacemos nada, pasan dos cosas:
-    //  1) el contexto queda "suspended" y el metrónomo se calla.
-    //  2) siguienteNotaTime quedó muy atrás en el tiempo, así que el
-    //     scheduler intenta "ponerse al día" disparando un montón de
-    //     clicks pegados de golpe.
-    //
-    // Acá reanudamos el audio y resincronizamos el próximo beat al
-    // instante actual, evitando ambos problemas.
-    //
-    function manejarCambioDeVisibilidad() {
-        if (!reproduciendo || !audioCtx) return;
-
-        if (audioCtx.state === "suspended") {
-            audioCtx.resume();
-        }
-
-        if (document.visibilityState === "visible") {
-            if (siguienteNotaTime < audioCtx.currentTime) {
-                siguienteNotaTime = audioCtx.currentTime + 0.05;
-            }
-        }
-    }
-
-    document.addEventListener("visibilitychange", manejarCambioDeVisibilidad);
-    window.addEventListener("focus", manejarCambioDeVisibilidad);
-
     function proximoPasoIntervalo() {
         // En compases compuestos o de subdivisión de corchea (ej 6/8), el BPM rige la negra con puntillo o la unidad de tiempo correspondiente, 
         // pero para marcar cada corchea exacta dividimos el pulso de negra acorde a la subdivisión.
@@ -324,32 +278,12 @@ HERRAMIENTAS.metronomo = function(contenedor) {
         osc.start(time);
         osc.stop(time + dur);
 
-        // Encolamos el beat para que el loop visual (rAF) lo pinte
-        // en el momento exacto, sin crear un temporizador nuevo por
-        // cada nota.
-        colaVisual.push({ time, paso });
-    }
-
-    // ========================================================
-    // LOOP VISUAL (requestAnimationFrame)
-    // ========================================================
-    //
-    // Corre en sincro con el refresco de pantalla, así que es mucho
-    // más liviano y estable en mobile que ir creando setTimeouts
-    // sueltos. Va sacando de colaVisual todo beat cuyo momento de
-    // audio ya llegó y lo pinta.
-    //
-    function loopVisual() {
-        if (!audioCtx) return;
-
-        while (colaVisual.length && colaVisual[0].time <= audioCtx.currentTime) {
-            const siguiente = colaVisual.shift();
-            actualizarUIBeat(siguiente.paso);
-        }
-
-        if (reproduciendo) {
-            rafID = requestAnimationFrame(loopVisual);
-        }
+        // Actualización visual sincronizada mediante requestAnimationFrame o temporizador exacto
+        const tiempoRestanteMs = (time - audioCtx.currentTime) * 1000;
+        setTimeout(() => {
+            if (!reproduciendo) return;
+            actualizarUIBeat(paso);
+        }, Math.max(0, tiempoRestanteMs));
     }
 
     function actualizarUIBeat(paso) {
@@ -381,20 +315,13 @@ HERRAMIENTAS.metronomo = function(contenedor) {
         inicializarAudioContext();
         siguienteNotaTime = audioCtx.currentTime + 0.05;
         pasoActual = 0;
-        colaVisual = [];
         reproduciendo = true;
         scheduler();
-        rafID = requestAnimationFrame(loopVisual);
     }
 
     function detenerMetronomo() {
         reproduciendo = false;
         clearTimeout(timerID);
-        if (rafID) {
-            cancelAnimationFrame(rafID);
-            rafID = null;
-        }
-        colaVisual = [];
         pasoActual = 0;
         const beats = wrapper.querySelectorAll(".beat");
         beats.forEach(b => {
@@ -469,11 +396,5 @@ HERRAMIENTAS.metronomo = function(contenedor) {
     contenedor._limpiarHerramienta = function() {
         detenerMetronomo();
         botonPlay.innerText = "▶ Iniciar";
-        document.removeEventListener("visibilitychange", manejarCambioDeVisibilidad);
-        window.removeEventListener("focus", manejarCambioDeVisibilidad);
-        if (audioCtx) {
-            audioCtx.close().catch(() => {});
-            audioCtx = null;
-        }
     };
 };

@@ -150,7 +150,7 @@ const herramientasDisponibles = {
             "🎹",
 
         descripcion:
-            "Tocá con el mouse, el dedo o tu teclado, y mirá en vivo qué acorde estás formando.",
+            "Explorá notas, alturas y identificación automática de acordes.",
 
         render:
             (
@@ -172,7 +172,7 @@ const herramientasDisponibles = {
             "⏱️",
 
         descripcion:
-            "Un pulso preciso al milisegundo, hasta en compases compuestos e irregulares.",
+            "Un pulso preciso para practicar y estudiar.",
 
         render:
             (
@@ -185,31 +185,17 @@ const herramientasDisponibles = {
     },
 
     intervalos: {
-        nombre: "Entrenador de Intervalos",
+        nombre: "Intervalos",
         icono: "👂",
-        descripcion: "Entrená el oído reconociendo distancias entre notas, armónicas o melódicas.",
+        descripcion: "Explorá distancias entre notas y entrená tu oído musical.",
         render: typeof HERRAMIENTAS !== "undefined" && typeof HERRAMIENTAS.intervalos === "function" ? HERRAMIENTAS.intervalos : null
     },
 
     acordes: {
         nombre: "Constructor de Acordes",
-        icono: "🎼",
-        descripcion: "Armá acordes nota por nota y descubrí al instante qué estructura armónica forman.",
+        icono: "🎹",
+        descripcion: "Armá acordes nota por nota y analizá su estructura armónica.",
         render: typeof HERRAMIENTAS !== "undefined" && typeof HERRAMIENTAS.acordes === "function" ? HERRAMIENTAS.acordes : null
-    },
-
-    diccionario: {
-        nombre: "Diccionario de Acordes",
-        icono: "📖",
-        descripcion: "Buscá cualquier acorde por su nombre y mirá sus notas en el piano y en el diapasón de guitarra.",
-        render: typeof HERRAMIENTAS !== "undefined" && typeof HERRAMIENTAS.diccionario === "function" ? HERRAMIENTAS.diccionario : null
-    },
-
-    afinador: {
-        nombre: "Afinador Cromático",
-        icono: "🎧",
-        descripcion: "Afiná tu instrumento en tiempo real usando el micrófono.",
-        render: HERRAMIENTAS.afinador
     }
 
 };
