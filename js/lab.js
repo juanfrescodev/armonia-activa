@@ -210,6 +210,13 @@ const herramientasDisponibles = {
         icono: "🎧",
         descripcion: "Afiná tu instrumento en tiempo real usando el micrófono.",
         render: HERRAMIENTAS.afinador
+    },
+
+    escalas: {
+        nombre: "Explorador de Escalas",
+        icono: "🎼",
+        descripcion: "Mapeá escalas en piano/guitarra, descubrí acordes e improvisá con bases.",
+        render: HERRAMIENTAS.escalas
     }
 
 };
