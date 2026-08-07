@@ -1,4 +1,3 @@
-
 // ============================================================
 // ARMONÍA ACTIVA — LABORATORIO
 // js/lab.js
@@ -209,15 +208,29 @@ const herramientasDisponibles = {
         nombre: "Afinador Cromático",
         icono: "🎧",
         descripcion: "Afiná tu instrumento en tiempo real usando el micrófono.",
-        render: HERRAMIENTAS.afinador
+        render: typeof HERRAMIENTAS !== "undefined" && typeof HERRAMIENTAS.afinador === "function" ? HERRAMIENTAS.afinador : null
     },
 
     escalas: {
         nombre: "Explorador de Escalas",
         icono: "🎼",
         descripcion: "Mapeá escalas en piano/guitarra, descubrí acordes e improvisá con bases.",
-        render: HERRAMIENTAS.escalas
-    }
+        render: typeof HERRAMIENTAS !== "undefined" && typeof HERRAMIENTAS.escalas === "function" ? HERRAMIENTAS.escalas : null
+    },
+
+    circulo: {
+            nombre: "Círculo de Quintas",
+            icono: "🔄",
+            descripcion: "Visualizá relaciones armónicas, armaduras de clave, acordes relativos y progresiones.",
+            render: typeof HERRAMIENTAS !== "undefined" && typeof HERRAMIENTAS.circulo === "function" ? HERRAMIENTAS.circulo : null
+        },
+
+    rearmonizador: {
+            nombre: "Rearmonizador Avanzado",
+            icono: "🪄",
+            descripcion: "Explorá sustituciones armónicas, dominantes secundarios, tritono y acordes de paso.",
+            render: typeof HERRAMIENTAS !== "undefined" && typeof HERRAMIENTAS.rearmonizador === "function" ? HERRAMIENTAS.rearmonizador : null
+        },
 
 };
 
@@ -760,4 +773,3 @@ window.addEventListener(
 console.log(
     "🧪 Laboratorio de Armonía Activa iniciado correctamente."
 );
-

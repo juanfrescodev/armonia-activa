@@ -16,11 +16,6 @@ const CLASES_ACORDES = {
     "F#": 6, G: 7, "G#": 8, A: 9, "A#": 10, B: 11
 };
 
-const FRECUENCIAS_NOTAS = {
-    C: 261.63, "C#": 277.18, D: 293.66, "D#": 311.13, E: 329.63, F: 349.23,
-    "F#": 369.99, G: 392.00, "G#": 415.30, A: 440.00, "A#": 466.16, B: 493.88
-};
-
 // Afinación estándar de la guitarra por cuerdas (6ta a 1ra: E, A, D, G, B, e)
 const NOTAS_CUERDAS_GUITARRA = [4, 9, 2, 7, 11, 4]; // Clases de nota correspondientes
 
@@ -81,7 +76,24 @@ const POSICIONES_GUITARRA = {
 };
 
 let notasSeleccionadasAcorde = [];
-let audioCtxAcordes = null;
+
+// Convierte una lista de notas sin octava (ej. ["C","E","G"]) en notas
+// con octava, apilando hacia arriba cada vez que la clase de nota no
+// sube respecto de la anterior. Así el acorde suena "abierto" y
+// prolijo en vez de amontonado todo en la misma octava.
+function asignarOctavasAcorde(notasLimpias) {
+    let octava = 4;
+    let anterior = -1;
+    return notasLimpias
+        .map(n => {
+            const clase = CLASES_ACORDES[n];
+            if (clase === undefined) return null;
+            if (clase <= anterior) octava++;
+            anterior = clase;
+            return `${n}${octava}`;
+        })
+        .filter(Boolean);
+}
 
 window.HERRAMIENTAS.acordes = function(panel) {
     if (!panel) return;
@@ -151,10 +163,13 @@ window.HERRAMIENTAS.acordes = function(panel) {
         </div>
     `;
 
+    // El sonido lo maneja el sintetizador compartido de audio.js
+    // (mismo Tone.PolySynth que usa el resto del Lab), así que no
+    // hay un AudioContext propio que cerrar acá. Igual soltamos
+    // cualquier nota que haya quedado sonando al salir.
     panel._limpiarHerramienta = () => {
-        if (audioCtxAcordes) {
-            audioCtxAcordes.close();
-            audioCtxAcordes = null;
+        if (typeof window.detenerAudio === "function") {
+            window.detenerAudio();
         }
     };
 
@@ -199,7 +214,7 @@ window.HERRAMIENTAS.acordes = function(panel) {
 
     const btnEscuchar = document.getElementById("btnEscucharAcorde");
     if (btnEscuchar) {
-        btnEscuchar.addEventListener("click", () => reproducirAcordeActual());
+        btnEscuchar.addEventListener("click", () => reproducirAcordeActual(btnEscuchar));
     }
 
     const btnLimpiar = document.getElementById("btnLimpiarAcorde");
@@ -316,40 +331,18 @@ function procesarAcordeActual() {
     }
 }
 
-function reproducirAcordeActual() {
+async function reproducirAcordeActual(boton = null) {
     const notasLimpias = notasSeleccionadasAcorde.map(n => n.replace(/[0-9]/g, ""));
     if (notasLimpias.length === 0) return;
 
-    try {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        if (!audioCtxAcordes) {
-            audioCtxAcordes = new AudioContext();
-        }
-        if (audioCtxAcordes.state === "suspended") {
-            audioCtxAcordes.resume();
-        }
+    const notasConOctava = asignarOctavasAcorde(notasLimpias);
+    if (notasConOctava.length === 0) return;
 
-        notasLimpias.forEach(nota => {
-            const freq = FRECUENCIAS_NOTAS[nota];
-            if (!freq) return;
-
-            const osc = audioCtxAcordes.createOscillator();
-            const gain = audioCtxAcordes.createGain();
-
-            osc.type = "sine";
-            osc.frequency.setValueAtTime(freq, audioCtxAcordes.currentTime);
-
-            gain.gain.setValueAtTime(0.15, audioCtxAcordes.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtxAcordes.currentTime + 1.2);
-
-            osc.connect(gain);
-            gain.connect(audioCtxAcordes.destination);
-
-            osc.start();
-            osc.stop(audioCtxAcordes.currentTime + 1.2);
-        });
-    } catch (e) {
-        console.warn("Audio no soportado o bloqueado por el navegador", e);
+    // Usamos el mismo sintetizador (Tone.js) que el resto del Lab,
+    // así el acorde suena con el mismo timbre cálido que el piano
+    // en vez de un pitido de oscilador crudo.
+    if (typeof window.reproducirNotas === "function") {
+        await window.reproducirNotas(notasConOctava, "1n", boton);
     }
 }
 
